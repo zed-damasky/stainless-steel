@@ -2,3 +2,4 @@ export { Button } from "./button";
 export { Input } from "./input"
 export { Checkbox } from "./checkbox";
 export { Slider } from "./slider";
+export { Badge } from "./badge";

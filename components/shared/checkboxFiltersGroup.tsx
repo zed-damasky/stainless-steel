@@ -64,6 +64,11 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
             endAdornment={item.endAdornment}
           />
         ))}
+        {list.length === 0 && (
+          <p className="text-gray-400 text-sm text-center py-2">
+            Ничего не найдено
+          </p>
+        )}
       </div>
 
       {items.length > limit && (

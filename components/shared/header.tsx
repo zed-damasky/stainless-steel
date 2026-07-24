@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button, Input } from "../ui";
 import { Container } from ".";
 import { ArrowRight, ShoppingCart, UserRound } from "lucide-react";
+import Link from "next/link";
 
 interface Props {
   classname?: string;
@@ -14,16 +15,21 @@ export const Header: React.FC<Props> = ({ classname }) => {
     <header className={cn("border border-b", classname)}>
       <Container className="flex items-center justify-between py-2 px-2 gap-10">
         {/* left side */}
-        <div className="flex items-center gap-4 select-none pointer-events-none ">
-          <Image src="/logo.svg" alt="logo" width={40} height={40} />
-          <div className="">
-            <h1 className="text 2xl uppercase font-black">Нержавеющая сталь</h1>
-            <p className="text-sm text-gray-400 leading-3">и не только</p>
+        <Link href="/">
+          <div className="flex items-center gap-4 select-none pointer-events-none ">
+            <Image src="/logo.svg" alt="logo" width={40} height={40} />
+            <div className="">
+              <h1 className="text 2xl uppercase font-black">
+                Нержавеющая сталь
+              </h1>
+              <p className="text-sm text-gray-400 leading-3">и не только</p>
+            </div>
           </div>
-        </div>
+        </Link>
+
         {/* center */}
         <div className="flex grow">
-          <Input className=""/>
+          <Input className="" />
         </div>
 
         {/* right side */}

@@ -8,3 +8,5 @@ export { FilterSide } from "./filterSide";
 export { FilterCheckbox } from "./filterCheckBox";
 export { SliderRange } from "./sliderRange";
 export { CheckboxFiltersGroup } from "./checkboxFiltersGroup";
+export { ProductCard } from "./productCard";
+export { ProductsGroupList } from "./productsGroupList";
