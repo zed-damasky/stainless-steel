@@ -28,7 +28,7 @@ export default function Home() {
           </div>
           {/* product side */}
           <div className="flex-1">
-            <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-8">
               <ProductsGroupList
                 title={"Круг"}
                 categoryId={1}
@@ -37,8 +37,9 @@ export default function Home() {
                     id: 0,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -51,8 +52,9 @@ export default function Home() {
                     id: 1,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -64,8 +66,9 @@ export default function Home() {
                     id: 2,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -77,8 +80,9 @@ export default function Home() {
                     id: 3,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -90,8 +94,9 @@ export default function Home() {
                     id: 4,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -103,8 +108,9 @@ export default function Home() {
                     id: 5,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -116,8 +122,9 @@ export default function Home() {
                     id: 6,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -129,8 +136,9 @@ export default function Home() {
                     id: 7,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -142,8 +150,9 @@ export default function Home() {
                     id: 8,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -162,8 +171,9 @@ export default function Home() {
                     id: 0,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -175,8 +185,9 @@ export default function Home() {
                     id: 1,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -188,8 +199,9 @@ export default function Home() {
                     id: 2,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -201,8 +213,9 @@ export default function Home() {
                     id: 3,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -214,8 +227,9 @@ export default function Home() {
                     id: 4,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -227,8 +241,9 @@ export default function Home() {
                     id: 5,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -240,8 +255,9 @@ export default function Home() {
                     id: 6,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -253,8 +269,9 @@ export default function Home() {
                     id: 7,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -266,8 +283,9 @@ export default function Home() {
                     id: 8,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -286,8 +304,9 @@ export default function Home() {
                     id: 0,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -299,8 +318,9 @@ export default function Home() {
                     id: 1,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -312,8 +332,9 @@ export default function Home() {
                     id: 2,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -325,8 +346,9 @@ export default function Home() {
                     id: 3,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -338,8 +360,9 @@ export default function Home() {
                     id: 4,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -351,8 +374,9 @@ export default function Home() {
                     id: 5,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -364,8 +388,9 @@ export default function Home() {
                     id: 6,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -377,8 +402,9 @@ export default function Home() {
                     id: 7,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },
@@ -390,8 +416,9 @@ export default function Home() {
                     id: 8,
                     name: "Предложение 1",
                     price: 10000,
-                    imageUrl:
+                    imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",
+                    ],
                     description: "",
                     tags: [
                       { text: "Быстрая отгрузка", variant: "default" },

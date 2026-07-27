@@ -1,0 +1,197 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(uuid())
+
+  fullName         String
+  email            String            @unique
+  password         String
+  verificationCode VerificationCode?
+
+  role     UserRole @default(USER)
+  verified Boolean  @default(false)
+
+  provider   String?
+  providerId String?
+
+  cart   Cart?
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id String @id @default(uuid())
+
+  name     String    @unique
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Material {
+  id String @id @default(uuid())
+
+  name     String    @unique
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SpecialBadge {
+  id String @id @default(uuid())
+
+  name     String    @unique
+  products Product[]
+}
+
+model Product {
+  id String @id @default(uuid())
+
+  name     String
+  imageUrl String[]
+  price    Decimal  @db.Decimal(10, 2)
+  quantity Int      @default(0)
+  mass     Decimal  @db.Decimal(10, 2)
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  material   Material @relation(fields: [materialId], references: [id])
+  materialId String
+
+  cartItems CartItem[]
+  badges    SpecialBadge[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id String @id @default(uuid())
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique
+
+  token String
+
+  totalAmount Decimal @default(0) @db.Decimal(10, 2)
+
+  cartItem CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id String @id @default(uuid())
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  cart   Cart   @relation(fields: [cartId], references: [id])
+  cartId String
+
+  quantity Int @default(1)
+}
+
+model Order {
+  id String @id @default(uuid())
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  token String
+
+  items       Json
+  totalAmount Decimal @db.Decimal(10, 2)
+
+  status OrderStatus
+
+  fullName String
+  address  String
+  email    String
+  phone    String
+  comment  String?
+
+  deliveryType      DeliveryType
+  deliveryTransport DeliveryTransport
+
+  insurance Insurance
+
+  paymentId String?
+  //deliveryId String?
+  //checkingId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationCode {
+  id String @id @default(uuid())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  code String
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, code])
+}
+
+enum Insurance {
+  NOT_INSURANCE
+  CUSTOMER_INSURANCE
+  SELLER_INSURANCE
+  OPERATOR_INSURANCE
+}
+
+enum DeliveryType {
+  CUSTOMER_SELF_FULL
+  SELLER_SELF_TO_CUSTOM_POINT
+  SELLER_SELF_FULL
+  OPERATOR_SELF_FULL
+  OPERATOR_SELF_TO_CUSTOM_POINT
+}
+
+enum DeliveryTransport {
+  NO_TRANSPORT
+  AUTOMOBILE_TRANSPORT
+  RAILWAY
+}
+
+enum OrderStatus {
+  PAYMENT_PENDING
+  PAYMENT_SUCCEED
+  PAYMENT_PROBLEM
+  PAYMENT_FAILURE
+  DELIVERY_PENDING
+  ON_DELIVERY
+  DELIVERY_SUCCEED
+  DELIVERY_PROBLEM
+  DELIVERY_FAILURE
+  ON_CHECKING
+  CHECKING_SUCCEED
+  CHECKING_PROBLEM
+  CHECKING_FAILURE
+  ORDER_SUCCEED
+  ORDER_CANCELLED
+  ORDER_FAILURE
+  ORDER_PROBLEM
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
