@@ -63,6 +63,7 @@ model Product {
   price    Decimal  @db.Decimal(10, 2)
   quantity Int      @default(0)
   mass     Decimal  @db.Decimal(10, 2)
+  description String
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String

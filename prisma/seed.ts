@@ -1,6 +1,16 @@
 import { prisma } from "./prisma";
+
+import {
+  categoriesMetal,
+  categoriesProducts,
+  specialBadge,
+  productStainlessSteelCircleMock,
+  productStainlessSteelQuadMock,
+  productAlloySteelQuadMock,
+  productAlloySteelCircleMock,
+  cartsMock,
+} from "./constants";
 import { hashSync } from "bcrypt";
-import { categoriesMetal, categoriesProducts, specialBadge } from "./constants";
 
 async function put() {
   await prisma.user.createMany({
@@ -24,48 +34,107 @@ async function put() {
 
   await prisma.category.createMany({
     data: categoriesProducts,
-    /*data: [
-      { name: "Круг" },
-      { name: "Квадрат" },
-      { name: "Шестигранник" },
-      { name: "Полоса" },
-      { name: "Уголок" },
-      { name: "Швеллер" },
-      { name: "Труба" },
-      { name: "Лист" },
-      { name: "Метизы" },
-      { name: "Прочее" },
-    ],*/
   });
 
   await prisma.material.createMany({
     data: categoriesMetal,
-    /*data: [
-      { name: "Нержавеющая сталь" },
-      { name: "Марочная сталь" },
-      { name: "Алюминий" },
-      { name: "Дюраль" },
-      { name: "Медь" },
-      { name: "Бронза" },
-      { name: "Латунь" },
-      { name: "Цинк" },
-      { name: "Нихром" },
-      { name: "Прочее" },
-    ],*/
   });
 
   await prisma.specialBadge.createMany({
     data: specialBadge,
-    /*data: [
-      { name: "Быстрая отгрузка" },
-      { name: "Новое" },
-      { name: "Популярное" },
-      { name: "Мало на складе" },
-    ],*/
+  });
+
+  for (const productStainlessSteelCircle of productStainlessSteelCircleMock) {
+    await prisma.product.create({
+      data: productStainlessSteelCircle,
+    });
+  }
+
+  for (const productStainlessSteelQuad of productStainlessSteelQuadMock) {
+    await prisma.product.create({
+      data: productStainlessSteelQuad,
+    });
+  }
+
+  for (const productAlloySteelQuad of productAlloySteelQuadMock) {
+    await prisma.product.create({
+      data: productAlloySteelQuad,
+    });
+  }
+
+  for (const productAlloySteelCircle of productAlloySteelCircleMock) {
+    await prisma.product.create({
+      data: productAlloySteelCircle,
+    });
+  }
+
+  for (const cart of cartsMock) {
+    await prisma.cart.create({
+      data: cart,
+    });
+  }
+  /*
+const getProductIdByName = async (productName: string): Promise<string> => {
+  const product = await prisma.product.findFirstOrThrow({
+    where: { name: productName },
+    select: { id: true },
+  });
+  return product.id;
+};
+
+const getCartIdByToken = async (cartToken: string): Promise<string> => {
+  const cart = await prisma.cart.findFirstOrThrow({
+    where: { token: cartToken },
+    select: { id: true },
+  });
+  return cart.id;
+};
+
+export const addProductToCart = async (productName: string, cartToken: string, quantity: number = 1) => {
+  try {
+    const productId = await getProductIdByName(productName);
+    const cartId = await getCartIdByToken(cartToken);
+
+    const cartItem = await prisma.cartItem.create({
+      data: {
+        productId,
+        cartId,
+        quantity,
+      },
+    });
+
+    return cartItem;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+*/
+
+  const product = await prisma.product.findFirstOrThrow({
+    where: { name: "Круг 12 мм, сталь 40Х" },
+    select: { id: true },
+  });
+
+  const cart = await prisma.cart.findFirstOrThrow({
+    where: { token: "123" },
+    select: { id: true },
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      productId: product.id,
+      cartId: cart.id,
+      quantity: 5,
+    },
   });
 }
 
 async function clear() {
+  await prisma.product.deleteMany({});
+  await prisma.cartItem.deleteMany({});
+  await prisma.cart.deleteMany({});
+  //////////////////
   await prisma.user.deleteMany({});
   await prisma.category.deleteMany({});
   await prisma.material.deleteMany({});
