@@ -95,7 +95,7 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return
-    onSelect(api)
+    onSelect(api) // todo delete element if not use
     api.on("reInit", onSelect)
     api.on("select", onSelect)
 

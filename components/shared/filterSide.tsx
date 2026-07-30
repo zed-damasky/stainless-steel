@@ -1,22 +1,27 @@
+"use client"
+
 import React from "react";
 import { CheckboxFiltersGroup, FilterCheckbox, SliderRange, Title } from ".";
 import { Input } from "../ui";
-import { categoriesMetal } from "../data";
 import { cn } from "@/lib/utils";
+import { useFilterMaterials } from "@/hooks/useFilterMaterials";
 
 interface Props {
   className?: string;
 }
 
 export const FilterSide: React.FC<Props> = ({ className }) => {
+
+  const {materials, loading, addedId, selectedIds} = useFilterMaterials();
+
   return (
     <div className={cn("mx-4", className)}>
       <Title text="Фильтры" size="sm" className="my-5 font-bold" />
       <div className="flex flex-col gap-4">
-        <FilterCheckbox text="Быстрая отгрузка" value={"fast_shipping"} />
-        <FilterCheckbox text="Новые предложения" value={"new_offers"} />
-        <FilterCheckbox text="Популярное" value={"popular_offers"} />
-        <FilterCheckbox text="Мало на складе" value={"low_in_stock"} />
+        <FilterCheckbox name="Быстрая отгрузка" id={"fast_shipping"} />
+        <FilterCheckbox name="Новые предложения" id={"new_offers"} />
+        <FilterCheckbox name="Популярное" id={"popular_offers"} />
+        <FilterCheckbox name="Мало на складе" id={"low_in_stock"} />
       </div>
 
       <div className="mt-2 border-y border-y-neutral-100 py-4">
@@ -66,8 +71,12 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         className="mt-5"
         title={"Материалы"}
         limit={4}
-        defaultItems={categoriesMetal}
-        items={categoriesMetal}
+        defaultItems={materials.slice(0,5)}
+        items={materials}
+        loading={loading}
+        onCheck={addedId}
+        selectedIds={selectedIds}
+        name="materials"
       />
     </div>
   );

@@ -1,10 +1,7 @@
 import {
-  Categories,
   Container,
   FilterSide,
-  ProductCard,
   ProductsGroupList,
-  SortPopup,
   Title,
   TopBar,
 } from "@/components/shared";
@@ -35,7 +32,7 @@ export default function Home() {
                 items={[
                   {
                     id: 0,
-                    name: "Предложение 1",
+                    name: "Предложение 1 Предложение 1Предложение 1Предложение 1Предложение 1",
                     price: 10000,
                     imageUrl: [
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg/330px-Barium_unter_Argon_Schutzgas_Atmosph%C3%A4re.jpg",

@@ -35,7 +35,7 @@ export const ProductCard: React.FC<Props> = ({
           <img className="w-53.75 h-53.75" src={imageUrl[0]} alt={name} />
         </div>
 
-        <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
+        <Title text={name} size="sm" className="mb-1 mt-3 font-bold line-clamp-1" />
         {/*<p className="text-sm text-gray-400">{tags} {description}</p>*/}
 
         {tags && tags.length > 0 && (

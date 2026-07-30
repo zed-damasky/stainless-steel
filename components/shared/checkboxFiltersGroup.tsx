@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { FilterChecboxProps, FilterCheckbox } from "./filterCheckBox";
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 type Item = FilterChecboxProps;
 
@@ -12,33 +12,48 @@ interface Props {
   defaultItems: Item[];
   limit?: number;
   searchInputPlaceholder?: string;
-  onChange?: (values: string[]) => void;
+  onCheck?: (id: string) => void;
   defaultValue?: string[];
   className?: string;
-}
+  loading?: boolean;
+  selectedIds?: Set<string>;
+  name?: string
+  }
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,
   items,
   defaultItems,
   limit = 5,
-  searchInputPlaceholder = "Поиск...",
-  onChange,
-  defaultValue,
+  searchInputPlaceholder = "Найти...",
+  onCheck,
   className,
+  loading,
+  selectedIds,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
 
   const list = showAll
     ? items.filter((item) =>
-        item.text.toLowerCase().includes(searchValue.toLowerCase()),
+        item.name.toLowerCase().includes(searchValue.toLowerCase()),
       )
     : defaultItems.slice(0, limit);
 
   const onChangedSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="font-bold mb-3">{title}</p>
+        {[...Array(limit + 1)].map((_, i) => (
+          <Skeleton key={i} className="h-6 mb-4 rounded-2xl" />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className={className}>
@@ -56,11 +71,11 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
         {list.map((item, index) => (
           <FilterCheckbox
-            onCheckedChange={(zxc) => console.log(zxc)}
-            checked={false}
+            onCheckedChange={() => onCheck?.(item.id)}
+            checked={selectedIds?.has(item.id)}
             key={index}
-            value={item.value}
-            text={item.text}
+            id={item.id}
+            name={item.name}
             endAdornment={item.endAdornment}
           />
         ))}
