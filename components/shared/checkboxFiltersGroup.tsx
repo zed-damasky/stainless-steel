@@ -17,8 +17,8 @@ interface Props {
   className?: string;
   loading?: boolean;
   selectedIds?: Set<string>;
-  name?: string
-  }
+  name?: string;
+}
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { CheckboxFiltersGroup, FilterCheckbox, SliderRange, Title } from ".";
@@ -11,8 +11,7 @@ interface Props {
 }
 
 export const FilterSide: React.FC<Props> = ({ className }) => {
-
-  const {materials, loading, addedId, selectedIds} = useFilterMaterials();
+  const { materials, loading, addedId, selectedIds } = useFilterMaterials();
 
   return (
     <div className={cn("mx-4", className)}>
@@ -71,7 +70,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         className="mt-5"
         title={"Материалы"}
         limit={4}
-        defaultItems={materials.slice(0,5)}
+        defaultItems={materials.slice(0, 5)}
         items={materials}
         loading={loading}
         onCheck={addedId}
