@@ -66,7 +66,7 @@ export const categoriesMetal = [
   { name: "Прочее" },
 ];
 
-export const specialBadge = [
+export const badge = [
   { name: "Быстрая отгрузка" },
   { name: "Новое" },
   { name: "Популярное" },

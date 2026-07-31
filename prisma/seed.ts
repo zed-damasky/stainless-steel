@@ -3,7 +3,7 @@ import { prisma } from "./prisma";
 import {
   categoriesMetal,
   categoriesProducts,
-  specialBadge,
+  badge,
   productStainlessSteelCircleMock,
   productStainlessSteelQuadMock,
   productAlloySteelQuadMock,
@@ -40,8 +40,8 @@ async function put() {
     data: categoriesMetal,
   });
 
-  await prisma.specialBadge.createMany({
-    data: specialBadge,
+  await prisma.badge.createMany({
+    data: badge,
   });
 
   for (const productStainlessSteelCircle of productStainlessSteelCircleMock) {
@@ -130,15 +130,37 @@ export const addProductToCart = async (productName: string, cartToken: string, q
   });
 }
 
+/*
 async function clear() {
-  await prisma.product.deleteMany({});
+  
   await prisma.cartItem.deleteMany({});
   await prisma.cart.deleteMany({});
+  await prisma.product.deleteMany({});
   //////////////////
   await prisma.user.deleteMany({});
   await prisma.category.deleteMany({});
   await prisma.material.deleteMany({});
-  await prisma.specialBadge.deleteMany({});
+  await prisma.badge.deleteMany({});
+  
+  
+}
+*/
+
+async function clear() {
+  const tables = await prisma.$queryRaw<{ tablename: string }[]>`
+    SELECT tablename 
+    FROM pg_tables 
+    WHERE schemaname = 'public' AND tablename != '_prisma_migrations'
+  `;
+
+  const tableList = tables.map((t) => `"${t.tablename}"`).join(", ");
+
+  if (tableList) {
+    await prisma.$executeRawUnsafe(
+      `TRUNCATE TABLE ${tableList} RESTART IDENTITY CASCADE;`,
+    );
+    console.log(`cleared tables: ${tables.length}`);
+  }
 }
 
 async function main() {

@@ -48,7 +48,7 @@ model Material {
   updatedAt DateTime @updatedAt
 }
 
-model SpecialBadge {
+model Badge {
   id String @id @default(uuid())
 
   name     String    @unique
@@ -72,7 +72,7 @@ model Product {
   materialId String
 
   cartItems CartItem[]
-  badges    SpecialBadge[]
+  badges    Badge[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

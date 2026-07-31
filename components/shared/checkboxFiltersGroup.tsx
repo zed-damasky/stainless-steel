@@ -9,7 +9,7 @@ type Item = FilterChecboxProps;
 interface Props {
   title: string;
   items: Item[];
-  defaultItems: Item[];
+  defaultItems?: Item[];
   limit?: number;
   searchInputPlaceholder?: string;
   onCheck?: (id: string) => void;
@@ -38,7 +38,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     ? items.filter((item) =>
         item.name.toLowerCase().includes(searchValue.toLowerCase()),
       )
-    : defaultItems.slice(0, limit);
+    : (defaultItems || items).slice(0, limit);
 
   const onChangedSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -48,7 +48,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     return (
       <div className={className}>
         <p className="font-bold mb-3">{title}</p>
-        {[...Array(limit + 1)].map((_, i) => (
+        {[...Array(limit)].map((_, i) => (
           <Skeleton key={i} className="h-6 mb-4 rounded-2xl" />
         ))}
       </div>
@@ -68,7 +68,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         </div>
       )}
 
-      <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
+      <div className="flex flex-col gap-4 pr-2 ">
         {list.map((item, index) => (
           <FilterCheckbox
             onCheckedChange={() => onCheck?.(item.id)}
