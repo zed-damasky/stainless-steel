@@ -11,7 +11,7 @@ interface Props {
   items: any[]; //todo fix any
   className?: string;
   listClassName?: string;
-  categoryId: string; //todo fix to string
+  categoryId: number; //todo fix to string
 }
 
 const tempDescription =

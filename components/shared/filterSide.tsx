@@ -7,7 +7,8 @@ import { useRangeState } from "@/hooks/useRangeState";
 import { useFilterOptions } from "@/hooks/useFilterOptions";
 import { Api } from "@/services/apiClient";
 import qs from "qs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useSearchParam } from "react-use";
 
 interface Props {
   className?: string;
@@ -23,8 +24,22 @@ interface QuantityRangeProps {
   quantityTo: number;
 }
 
+interface QueryFilters extends PriceRangeProps, QuantityRangeProps {
+  materials: string[];
+  badges: string[];
+}
+
 export const FilterSide: React.FC<Props> = ({ className }) => {
+  const searchParams = useSearchParams() as unknown as Map<
+    keyof QueryFilters,
+    string
+  >;
+
   const router = useRouter();
+  const pathname = usePathname();
+
+  const shouldSyncUrlRef = React.useRef(false);
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const fetchMaterials = React.useCallback(() => Api.materials.getAll(), []);
   const fetchBadges = React.useCallback(() => Api.badges.getAll(), []);
@@ -53,6 +68,32 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     min: number;
     max: number;
   } | null>(null);
+
+  const handleBadgeCheck = (id: string) => {
+    shouldSyncUrlRef.current = true;
+    onBadgeCheck(id);
+  };
+
+  const handleMaterialCheck = (id: string) => {
+    shouldSyncUrlRef.current = true;
+    onMaterialCheck(id);
+  };
+  const handlePriceChange = (vals: { from: number; to: number }) => {
+    shouldSyncUrlRef.current = true;
+
+    updatePriceFields({
+      priceFrom: vals.from,
+      priceTo: vals.to,
+    });
+  };
+  const handleQuantityChange = (vals: { from: number; to: number }) => {
+    shouldSyncUrlRef.current = true;
+
+    updateQuantityFields({
+      quantityFrom: vals.from,
+      quantityTo: vals.to,
+    });
+  };
 
   const [limitsLoading, setLimitsLoading] = React.useState(true);
 
@@ -97,8 +138,69 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     }
   }, [quantityLimits, updateQuantity]);
 
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  //const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
+  React.useEffect(() => {
+    if (limitsLoading) return;
+
+    if (!shouldSyncUrlRef.current) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      shouldSyncUrlRef.current = false;
+
+      const priceChanged =
+        !!priceLimits &&
+        (price.priceFrom !== priceLimits.min ||
+          price.priceTo !== priceLimits.max);
+
+      const quantityChanged =
+        !!quantityLimits &&
+        (quantity.quantityFrom !== quantityLimits.min ||
+          quantity.quantityTo !== quantityLimits.max);
+
+      const filters = {
+        price: priceChanged ? price : undefined,
+        quantity: quantityChanged ? quantity : undefined,
+        badges:
+          selectedBadgeIds.size > 0 ? Array.from(selectedBadgeIds) : undefined,
+        materials:
+          selectedMaterialIds.size > 0
+            ? Array.from(selectedMaterialIds)
+            : undefined,
+      };
+
+      const queryString = qs.stringify(filters, {
+        arrayFormat: "comma",
+        skipNulls: true,
+      });
+
+      router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
+        scroll: false,
+      });
+    }, 30);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [
+    selectedMaterialIds,
+    selectedBadgeIds,
+    price,
+    quantity,
+    router,
+    limitsLoading,
+    pathname,
+    priceLimits,
+    quantityLimits,
+  ]);
+
+  /*
   React.useEffect(() => {
     if (limitsLoading) return;
 
@@ -128,7 +230,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     router,
     limitsLoading,
   ]);
-
+*/
   return (
     <div className={cn("mx-4", className)}>
       <Title text="Фильтры" size="sm" className="my-5 font-bold" />
@@ -139,7 +241,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
           limit={4}
           items={badges}
           loading={badgesLoading}
-          onCheck={onBadgeCheck}
+          onCheck={handleBadgeCheck}
           selectedIds={selectedBadgeIds}
           name="badges"
         />
@@ -150,9 +252,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         values={{ from: price.priceFrom, to: price.priceTo }}
         limits={priceLimits}
         loading={limitsLoading}
-        onValueChange={(vals) =>
-          updatePriceFields({ priceFrom: vals.from, priceTo: vals.to })
-        }
+        onValueChange={handlePriceChange}
       />
 
       <RangeFilterSection
@@ -160,12 +260,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         values={{ from: quantity.quantityFrom, to: quantity.quantityTo }}
         limits={quantityLimits}
         loading={limitsLoading}
-        onValueChange={(vals) =>
-          updateQuantityFields({
-            quantityFrom: vals.from,
-            quantityTo: vals.to,
-          })
-        }
+        onValueChange={handleQuantityChange}
       />
 
       <CheckboxFiltersGroup
@@ -174,7 +269,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         defaultItems={materials.slice(0, 4)}
         items={materials}
         loading={materialsLoading}
-        onCheck={onMaterialCheck}
+        onCheck={handleMaterialCheck}
         selectedIds={selectedMaterialIds}
         name="materials"
       />
