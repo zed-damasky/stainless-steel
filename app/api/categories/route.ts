@@ -5,7 +5,7 @@ export async function GET() {
   const categories = await prisma.category.findMany({
     orderBy: { name: "asc" },
     include: {
-      products: true, // ← Должно ТОЧНО совпадать с типом
+      products: true,
     },
   });
 
