@@ -58,11 +58,11 @@ model Badge {
 model Product {
   id String @id @default(uuid())
 
-  name     String
-  imageUrl String[]
-  price    Decimal  @db.Decimal(10, 2)
-  quantity Int      @default(0)
-  mass     Decimal  @db.Decimal(10, 2)
+  name        String
+  imageUrl    String[]
+  price       Decimal  @db.Decimal(10, 2)
+  quantity    Int      @default(0)
+  mass        Decimal  @db.Decimal(10, 2)
   description String
 
   category   Category @relation(fields: [categoryId], references: [id])
@@ -74,8 +74,12 @@ model Product {
   cartItems CartItem[]
   badges    Badge[]
 
+  ordersCount Int @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([ordersCount])
 }
 
 model Cart {

@@ -7,6 +7,10 @@ export interface ProductStats {
   quantity: { min: number; max: number };
 }
 
+export const getAll = async (): Promise<Product[]> => {
+  return (await axiosInstance.get<Product[]>(ApiRoutes.MATERIAL)).data;
+};
+
 export const search = async (query: string): Promise<Product[]> => {
   return (
     await axiosInstance.get<Product[]>(ApiRoutes.SEARCH_PRODUCTS, {

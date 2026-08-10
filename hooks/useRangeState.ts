@@ -5,9 +5,13 @@ export const useRangeState = <T extends Record<keyof T, number>>(
 ) => {
   const [state, setState] = React.useState<T>(initial);
 
-  const updateField = (name: keyof T, value: number) => {
+  const updateField = React.useCallback((name: keyof T, value: number) => {
     setState((prev) => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  return [state, updateField] as const;
+  const updateFields = React.useCallback((values: Partial<T>) => {
+    setState((prev) => ({ ...prev, ...values }));
+  }, []);
+
+  return [state, updateField, updateFields] as const;
 };

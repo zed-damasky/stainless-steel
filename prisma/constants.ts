@@ -86,15 +86,10 @@ export const productStainlessSteelCircleMock = [
     mass: 0.62,
     description:
       "Круглый прокат из нержавеющей стали AISI 304 диаметром 10 мм. Применяется в пищевой промышленности, машиностроении и строительстве. Устойчив к коррозии и механическим воздействиям.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Быстрая отгрузка" }, { name: "Популярное" }],
-    },
+    ordersCount: 342,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Быстрая отгрузка" }, { name: "Популярное" }] },
   },
   {
     name: "Круг нержавеющий 12 мм AISI 316",
@@ -108,15 +103,10 @@ export const productStainlessSteelCircleMock = [
     mass: 0.89,
     description:
       "Круг из нержавеющей стали AISI 316 диаметром 12 мм. Повышенная коррозионная стойкость благодаря содержанию молибдена. Идеален для морской среды и химической промышленности.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Популярное" }],
-    },
+    ordersCount: 215,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Популярное" }] },
   },
   {
     name: "Круг нержавеющий 16 мм AISI 304",
@@ -130,15 +120,10 @@ export const productStainlessSteelCircleMock = [
     mass: 1.58,
     description:
       "Круглый пруток из нержавейки AISI 304 диаметром 16 мм. Используется для изготовления валов, осей, крепежных элементов. Отличная свариваемость и пластичность.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Быстрая отгрузка" }],
-    },
+    ordersCount: 48,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Быстрая отгрузка" }] },
   },
   {
     name: "Круг нержавеющий 20 мм AISI 304",
@@ -152,15 +137,10 @@ export const productStainlessSteelCircleMock = [
     mass: 2.47,
     description:
       "Круг из нержавеющей стали диаметром 20 мм марки AISI 304. Применяется в архитектурных конструкциях, мебельном производстве и декоративных элементах. Поверхность шлифованная.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Новое" }, { name: "Популярное" }],
-    },
+    ordersCount: 189,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Новое" }, { name: "Популярное" }] },
   },
   {
     name: "Круг нержавеющий 25 мм AISI 316",
@@ -174,15 +154,10 @@ export const productStainlessSteelCircleMock = [
     mass: 3.85,
     description:
       "Круглый прокат из стали AISI 316 диаметром 25 мм. Высокая прочность и устойчивость к агрессивным средам. Используется в судостроении и химическом машиностроении.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Мало на складе" }],
-    },
+    ordersCount: 12,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Мало на складе" }] },
   },
   {
     name: "Круг нержавеющий 30 мм AISI 304",
@@ -196,15 +171,10 @@ export const productStainlessSteelCircleMock = [
     mass: 5.55,
     description:
       "Круг из нержавеющей стали AISI 304 диаметром 30 мм. Предназначен для изготовления деталей машин, валов, втулок. Калиброванный, точные размеры.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Быстрая отгрузка" }],
-    },
+    ordersCount: 67,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Быстрая отгрузка" }] },
   },
   {
     name: "Круг нержавеющий 35 мм AISI 310",
@@ -218,15 +188,10 @@ export const productStainlessSteelCircleMock = [
     mass: 7.55,
     description:
       "Жаропрочный круг из нержавеющей стали AISI 310 диаметром 35 мм. Рабочая температура до 1100°C. Применяется в печах, теплообменниках и высокотемпературных установках.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Мало на складе" }, { name: "Новое" }],
-    },
+    ordersCount: 8,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Мало на складе" }, { name: "Новое" }] },
   },
   {
     name: "Круг нержавеющий 40 мм AISI 304",
@@ -240,15 +205,10 @@ export const productStainlessSteelCircleMock = [
     mass: 9.86,
     description:
       "Круглый пруток из нержавейки AISI 304 диаметром 40 мм. Используется в тяжелом машиностроении, для изготовления крупных деталей и конструкций. Поверхность матовая.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
-    badges: {
-      connect: [{ name: "Популярное" }],
-    },
+    ordersCount: 156,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
+    badges: { connect: [{ name: "Популярное" }] },
   },
   {
     name: "Круг нержавеющий 50 мм AISI 316",
@@ -261,12 +221,9 @@ export const productStainlessSteelCircleMock = [
     mass: 15.41,
     description:
       "Круг из нержавеющей стали AISI 316 диаметром 50 мм. Максимальная коррозионная стойкость и прочность. Применяется в нефтегазовой отрасли, судостроении и химической промышленности.",
-    category: {
-      connect: { name: "Круг" },
-    },
-    material: {
-      connect: { name: "Нержавеющая сталь" },
-    },
+    ordersCount: 23,
+    category: { connect: { name: "Круг" } },
+    material: { connect: { name: "Нержавеющая сталь" } },
     badges: {
       connect: [{ name: "Мало на складе" }, { name: "Быстрая отгрузка" }],
     },
@@ -286,6 +243,7 @@ export const productStainlessSteelQuadMock = [
     mass: 0.79,
     description:
       "Квадратный прокат из нержавеющей стали AISI 304 сечением 10x10 мм. Применяется для изготовления каркасов, стеллажей, элементов декора и деталей в пищевой промышленности. Отличная коррозионная стойкость.",
+    ordersCount: 287,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -308,6 +266,7 @@ export const productStainlessSteelQuadMock = [
     mass: 1.14,
     description:
       "Квадрат из нержавеющей стали AISI 316 сечением 12x12 мм. Благодаря добавлению молибдена обладает повышенной устойчивостью к хлоридам и морской воде. Идеален для судостроения и химической отрасли.",
+    ordersCount: 198,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -330,6 +289,7 @@ export const productStainlessSteelQuadMock = [
     mass: 2.02,
     description:
       "Квадратный пруток из стали AISI 304 размером 16x16 мм. Используется в машиностроении для изготовления валов, осей и крепежных элементов. Поверхность шлифованная, точные геометрические размеры.",
+    ordersCount: 54,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -352,6 +312,7 @@ export const productStainlessSteelQuadMock = [
     mass: 3.16,
     description:
       "Квадрат из нержавеющей стали AISI 304 сечением 20x20 мм. Широко применяется в архитектурных конструкциях, мебельном производстве и при изготовлении ограждений. Эстетичный внешний вид.",
+    ordersCount: 176,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -374,6 +335,7 @@ export const productStainlessSteelQuadMock = [
     mass: 4.93,
     description:
       "Квадратный прокат из стали AISI 316 размером 25x25 мм. Высокая прочность и устойчивость к агрессивным химическим средам. Используется в нефтегазовой отрасли и тяжелом машиностроении.",
+    ordersCount: 15,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -396,6 +358,7 @@ export const productStainlessSteelQuadMock = [
     mass: 7.11,
     description:
       "Квадрат из нержавеющей стали AISI 304 сечением 30x30 мм. Предназначен для изготовления несущих конструкций, рам и опорных элементов. Калиброванный, с высокой точностью размеров.",
+    ordersCount: 72,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -418,6 +381,7 @@ export const productStainlessSteelQuadMock = [
     mass: 9.68,
     description:
       "Жаропрочный квадрат из нержавеющей стали AISI 321 размером 35x35 мм. Стабилизирован титаном, рабочая температура до 800°C. Применяется в печах, теплообменниках и выхлопных системах.",
+    ordersCount: 9,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -440,6 +404,7 @@ export const productStainlessSteelQuadMock = [
     mass: 12.64,
     description:
       "Квадратный пруток из нержавейки AISI 304 сечением 40x40 мм. Используется в тяжелом машиностроении для изготовления крупных деталей, штампов и пресс-форм. Поверхность матовая.",
+    ordersCount: 143,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -462,6 +427,7 @@ export const productStainlessSteelQuadMock = [
     mass: 19.75,
     description:
       "Квадрат из нержавеющей стали AISI 316 размером 50x50 мм. Максимальная коррозионная стойкость и механическая прочность. Применяется в судостроении, химической промышленности и энергетике.",
+    ordersCount: 28,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -487,6 +453,7 @@ export const productAlloySteelCircleMock = [
     mass: 0.89,
     description:
       "Круглый прокат из легированной конструкционной стали 40Х диаметром 12 мм. Обладает высокой прочностью и хорошей обрабатываемостью. Применяется для изготовления осей, валов, шестерен и других деталей машин.",
+    ordersCount: 412,
     category: {
       connect: { name: "Круг" },
     },
@@ -509,6 +476,7 @@ export const productAlloySteelCircleMock = [
     mass: 1.58,
     description:
       "Круг из низколегированной стали 09Г2С диаметром 16 мм. Отличается высокой свариваемостью и хладостойкостью (до -70°C). Широко используется в строительстве, мостостроении и производстве сварных конструкций.",
+    ordersCount: 328,
     category: {
       connect: { name: "Круг" },
     },
@@ -531,6 +499,7 @@ export const productAlloySteelCircleMock = [
     mass: 2.47,
     description:
       "Качественный конструкционный углеродистый круг сталь 45 диаметром 20 мм. После термической обработки приобретает высокую твердость и износостойкость. Идеален для деталей, работающих под нагрузкой (валы, шпиндели).",
+    ordersCount: 63,
     category: {
       connect: { name: "Круг" },
     },
@@ -552,6 +521,7 @@ export const productAlloySteelCircleMock = [
     mass: 3.85,
     description:
       "Круг из высокопрочной легированной стали 30ХГСА (хромансиль) диаметром 25 мм. Сочетает высокую прочность с хорошей ударной вязкостью. Применяется в авиастроении и для изготовления высоконагруженных деталей.",
+    ordersCount: 11,
     category: {
       connect: { name: "Круг" },
     },
@@ -573,6 +543,7 @@ export const productAlloySteelCircleMock = [
     mass: 5.55,
     description:
       "Круглый прокат из рессорно-пружинной стали 65Г диаметром 30 мм. Обладает высоким пределом упругости и выносливости. Основное применение: изготовление пружин, рессор, шайб и тормозных лент.",
+    ordersCount: 187,
     category: {
       connect: { name: "Круг" },
     },
@@ -594,6 +565,7 @@ export const productAlloySteelCircleMock = [
     mass: 9.86,
     description:
       "Круг из конструкционной углеродистой стали 20 диаметром 40 мм. Хорошо сваривается без ограничений, поддается цементации и цианированию для повышения твердости поверхности. Используется для малонагруженных деталей.",
+    ordersCount: 74,
     category: {
       connect: { name: "Круг" },
     },
@@ -615,6 +587,7 @@ export const productAlloySteelCircleMock = [
     mass: 15.41,
     description:
       "Круг из легированной стали 40ХН диаметром 50 мм. Отличается высокой прокаливаемостью и прочностью. Применяется для изготовления крупных ответственных деталей: коленчатых валов, шатунов, тяжелых шестерен.",
+    ordersCount: 19,
     category: {
       connect: { name: "Круг" },
     },
@@ -636,6 +609,7 @@ export const productAlloySteelCircleMock = [
     mass: 22.19,
     description:
       "Круглый прокат из легированной стали 35ХМ диаметром 60 мм. Работает при высоких температурах и нагрузках. Используется в энергетическом машиностроении, для изготовления валов турбин и крепежа повышенной прочности.",
+    ordersCount: 7,
     category: {
       connect: { name: "Круг" },
     },
@@ -657,6 +631,7 @@ export const productAlloySteelCircleMock = [
     mass: 39.46,
     description:
       "Круг из подшипниковой стали ШХ15 диаметром 80 мм. Обладает высокой твердостью, износостойкостью и контактной выносливостью. Предназначен для изготовления колец и тел качения подшипников, а также измерительного инструмента.",
+    ordersCount: 256,
     category: {
       connect: { name: "Круг" },
     },
@@ -681,6 +656,7 @@ export const productAlloySteelQuadMock = [
     mass: 0.79,
     description:
       "Квадратный прокат из конструкционной углеродистой стали обыкновенного качества Ст3сп. Отличается хорошей свариваемостью и пластичностью. Широко применяется для изготовления строительных конструкций, решеток, ограждений и закладных деталей.",
+    ordersCount: 385,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -702,6 +678,7 @@ export const productAlloySteelQuadMock = [
     mass: 1.13,
     description:
       "Квадрат из качественной конструкционной углеродистой стали 45. После термической обработки (закалки и отпуска) приобретает высокую прочность и твердость. Идеален для изготовления осей, шпинделей, валов и шестерен.",
+    ordersCount: 241,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -723,6 +700,7 @@ export const productAlloySteelQuadMock = [
     mass: 1.54,
     description:
       "Квадратный прокат из низколегированной стали 09Г2С. Обладает высокой свариваемостью без подогрева и хладостойкостью до -70°C. Основное применение: несущие элементы сварных конструкций в строительстве и мостостроении.",
+    ordersCount: 58,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -744,6 +722,7 @@ export const productAlloySteelQuadMock = [
     mass: 2.01,
     description:
       "Квадрат из легированной конструкционной стали 40Х. Характеризуется высокой прочностью и хорошей обрабатываемостью резанием. Применяется для изготовления улучшаемых деталей: валов, втулок, зубчатых колес и крепежа.",
+    ordersCount: 164,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -765,6 +744,7 @@ export const productAlloySteelQuadMock = [
     mass: 3.14,
     description:
       "Квадратный прокат из качественной конструкционной углеродистой стали 20. Хорошо поддается цементации и цианированию для повышения твердости поверхностного слоя. Используется для малонагруженных деталей, рычагов, копира.",
+    ordersCount: 71,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -786,6 +766,7 @@ export const productAlloySteelQuadMock = [
     mass: 4.91,
     description:
       "Квадрат из рессорно-пружинной стали 65Г. Отличается высоким пределом упругости, выносливостью и износостойкостью. Основное назначение: изготовление пружин, рессор, стопорных шайб и тормозных лент.",
+    ordersCount: 18,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -807,6 +788,7 @@ export const productAlloySteelQuadMock = [
     mass: 7.07,
     description:
       "Квадратный прокат из высокопрочной легированной стали 30ХГСА (хромансиль). Сочетает в себе высокую прочность с хорошей ударной вязкостью. Критически важен в авиастроении и для высоконагруженных деталей машин.",
+    ordersCount: 6,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -828,6 +810,7 @@ export const productAlloySteelQuadMock = [
     mass: 9.62,
     description:
       "Квадрат из легированной конструкционной стали 40ХН. Обладает высокой прокаливаемостью и прочностью. Применяется для изготовления крупных ответственных деталей: коленчатых валов, шатунов и тяжелых шестерен.",
+    ordersCount: 132,
     category: {
       connect: { name: "Квадрат" },
     },
@@ -849,6 +832,7 @@ export const productAlloySteelQuadMock = [
     mass: 12.56,
     description:
       "Квадратный прокат из шарикоподшипниковой стали ШХ15. Гарантирует высокую твердость, износостойкость и контактную выносливость. Предназначен для изготовления тел качения подшипников, калибров и измерительного инструмента.",
+    ordersCount: 24,
     category: {
       connect: { name: "Квадрат" },
     },

@@ -73,43 +73,6 @@ async function put() {
       data: cart,
     });
   }
-  /*
-const getProductIdByName = async (productName: string): Promise<string> => {
-  const product = await prisma.product.findFirstOrThrow({
-    where: { name: productName },
-    select: { id: true },
-  });
-  return product.id;
-};
-
-const getCartIdByToken = async (cartToken: string): Promise<string> => {
-  const cart = await prisma.cart.findFirstOrThrow({
-    where: { token: cartToken },
-    select: { id: true },
-  });
-  return cart.id;
-};
-
-export const addProductToCart = async (productName: string, cartToken: string, quantity: number = 1) => {
-  try {
-    const productId = await getProductIdByName(productName);
-    const cartId = await getCartIdByToken(cartToken);
-
-    const cartItem = await prisma.cartItem.create({
-      data: {
-        productId,
-        cartId,
-        quantity,
-      },
-    });
-
-    return cartItem;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-*/
 
   const product = await prisma.product.findFirstOrThrow({
     where: { name: "Круг 12 мм, сталь 40Х" },

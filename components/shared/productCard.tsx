@@ -10,7 +10,7 @@ interface Tag {
 }
 
 interface Props {
-  id: number;
+  id: string;
   name: string;
   price: number;
   imageUrl: string[];
@@ -38,9 +38,8 @@ export const ProductCard: React.FC<Props> = ({
         <Title
           text={name}
           size="sm"
-          className="mb-1 mt-3 font-bold line-clamp-1"
+          className="mb-1 mt-3 font-bold line-clamp-2"
         />
-        {/*<p className="text-sm text-gray-400">{tags} {description}</p>*/}
 
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-2">

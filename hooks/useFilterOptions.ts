@@ -13,8 +13,10 @@ export const useFilterOptions = <
 ) => {
   const [items, setItems] = React.useState<FilterItem[]>([]);
   const [loading, setLoading] = React.useState(true);
-
   const [selectedIds, { toggle }] = useSet(new Set<string>());
+
+  const fetchFnRef = React.useRef(fetchFn);
+  fetchFnRef.current = fetchFn;
 
   React.useEffect(() => {
     let isMounted = true;
@@ -22,31 +24,25 @@ export const useFilterOptions = <
     async function fetchData() {
       try {
         setLoading(true);
-        const data = await fetchFn();
+        const data = await fetchFnRef.current();
 
         if (isMounted) {
           setItems(
-            data.map((item) => ({
-              id: String(item.id),
-              name: item.name,
-            })),
+            data.map((item) => ({ id: String(item.id), name: item.name })),
           );
         }
       } catch (e) {
         console.error(e);
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        if (isMounted) setLoading(false);
       }
     }
 
     fetchData();
-
     return () => {
       isMounted = false;
     };
-  }, [fetchFn]);
+  }, []);
 
   return { items, loading, selectedIds, onCheck: toggle };
 };
