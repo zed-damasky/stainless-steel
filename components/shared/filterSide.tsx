@@ -1,4 +1,5 @@
 "use client";
+//todo useMemo ext, fix DRY 
 
 import React from "react";
 import { CheckboxFiltersGroup, Title, RangeFilterSection } from ".";
@@ -27,6 +28,7 @@ interface QuantityRangeProps {
 interface QueryFilters extends PriceRangeProps, QuantityRangeProps {
   materials: string[];
   badges: string[];
+  categories: string[];
 }
 
 export const FilterSide: React.FC<Props> = ({ className }) => {
@@ -44,6 +46,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
   const fetchMaterials = React.useCallback(() => Api.materials.getAll(), []);
   const fetchBadges = React.useCallback(() => Api.badges.getAll(), []);
   const fetchLimits = React.useCallback(() => Api.products.getStats(), []);
+  const fetchCategories = React.useCallback(() => Api.categories.getAll(), []);
 
   const {
     items: materials,
@@ -51,6 +54,13 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     selectedIds: selectedMaterialIds,
     onCheck: onMaterialCheck,
   } = useFilterOptions(fetchMaterials);
+
+  const {
+    items: categories,
+    loading: categoriesLoading,
+    selectedIds: selectedCategoryIds,
+    onCheck: onCategoryCheck,
+  } = useFilterOptions(fetchCategories);
 
   const {
     items: badges,
@@ -68,10 +78,16 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     min: number;
     max: number;
   } | null>(null);
+  
 
   const handleBadgeCheck = (id: string) => {
     shouldSyncUrlRef.current = true;
     onBadgeCheck(id);
+  };
+
+    const handleCategoryCheck = (id: string) => {
+    shouldSyncUrlRef.current = true;
+    onCategoryCheck(id);
   };
 
   const handleMaterialCheck = (id: string) => {
@@ -138,8 +154,6 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     }
   }, [quantityLimits, updateQuantity]);
 
-  //const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
   React.useEffect(() => {
     if (limitsLoading) return;
 
@@ -171,6 +185,10 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
           selectedMaterialIds.size > 0
             ? Array.from(selectedMaterialIds)
             : undefined,
+        categories:
+          selectedCategoryIds.size > 0
+            ? Array.from(selectedCategoryIds)
+            : undefined,
       };
 
       const queryString = qs.stringify(filters, {
@@ -190,6 +208,7 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
     };
   }, [
     selectedMaterialIds,
+    selectedCategoryIds,
     selectedBadgeIds,
     price,
     quantity,
@@ -233,11 +252,10 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
 */
   return (
     <div className={cn("mx-4", className)}>
-      <Title text="Фильтры" size="sm" className="my-5 font-bold" />
+      <Title text="Фильтры" size="md" className="font-bold" />
 
       <div className="flex flex-col gap-4">
         <CheckboxFiltersGroup
-          title=""
           limit={4}
           items={badges}
           loading={badgesLoading}
@@ -272,6 +290,17 @@ export const FilterSide: React.FC<Props> = ({ className }) => {
         onCheck={handleMaterialCheck}
         selectedIds={selectedMaterialIds}
         name="materials"
+      />
+
+      <CheckboxFiltersGroup
+        title="Категории"
+        limit={4}
+        defaultItems={categories.slice(0, 4)}
+        items={categories}
+        loading={categoriesLoading}
+        onCheck={handleCategoryCheck}
+        selectedIds={selectedCategoryIds}
+        name="categories"
       />
     </div>
   );

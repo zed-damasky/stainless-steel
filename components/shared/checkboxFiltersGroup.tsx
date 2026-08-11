@@ -3,11 +3,12 @@
 import React from "react";
 import { FilterChecboxProps, FilterCheckbox } from "./filterCheckBox";
 import { Input, Skeleton } from "../ui";
+import { cn } from "@/lib/utils";
 
 type Item = FilterChecboxProps;
 
 interface Props {
-  title: string;
+  title?: string;
   items: Item[];
   defaultItems?: Item[];
   limit?: number;
@@ -46,7 +47,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 
   if (loading) {
     return (
-      <div className={className}>
+      <div className={cn("", className) }>
         <p className="font-bold mb-3">{title}</p>
         {[...Array(limit)].map((_, i) => (
           <Skeleton key={i} className="h-6 mb-4 rounded-2xl" />
@@ -56,7 +57,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   }
 
   return (
-    <div className={className}>
+    <div className={cn("my-4", className)}>
       <p className="font-bold mb-3">{title}</p>
       {showAll && (
         <div className="mb-5">

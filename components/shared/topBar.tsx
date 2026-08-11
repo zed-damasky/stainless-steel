@@ -15,12 +15,13 @@ export const TopBar: React.FC<Props> = ({ className }) => {
   return (
     <div
       className={cn(
-        "sticky top-0 bg-white py-1 shadow-lg shadow-black/5 z-10 mx-4",
+        "sticky top-0 bg-white py-1 shadow-lg shadow-black/5 z-10 mx-2",
         className,
       )}
     >
       <Container>
-        <Categories />
+       {/* todo delete, not use
+       <Categories />*/} 
         <SortPopup />
       </Container>
     </div>

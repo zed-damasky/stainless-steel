@@ -26,6 +26,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
 
+  //todo not use anymore, maybe delete
   const intersectionRef = React.useRef<HTMLDivElement>(
     null,
   ) as React.RefObject<HTMLDivElement>;

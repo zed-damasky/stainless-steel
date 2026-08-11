@@ -10,11 +10,12 @@ export default function Home() {
   return (
     <>
       <Container className="mt-5">
+        {/*todo not use anymore, maybe delete
         <Title
           text="Все предложения"
           size="lg"
           className="font-extrabold mx-4"
-        />
+        />*/}
       </Container>
       <TopBar />
 
