@@ -32,14 +32,40 @@ export const RangeFilterSection: React.FC<Props> = ({
   className,
   onValueChange,
 }) => {
-  const getValidValue = (val: number, isMin: boolean) => {
+  const getValidValue = (val: number, field: "from" | "to") => {
     if (!limits) return val;
-    if (isMin) return Math.max(val, limits.min);
-    return val <= limits.min ? limits.max : Math.min(val, limits.max);
+
+    if (field === "from") {
+      return Math.max(limits.min, Math.min(val, values.to));
+    }
+
+    return Math.min(limits.max, Math.max(val, values.from));
   };
 
   const handleInputChange = (field: "from" | "to", value: string) => {
     onValueChange({ ...values, [field]: Number(value) });
+  };
+
+  const handleInputBlur = (field: "from" | "to") => {
+    if (!limits) return;
+
+    let val = values[field];
+
+    if (isNaN(val) || val === null) {
+      val = field === "from" ? limits.min : limits.max;
+    }
+
+    val = Math.max(limits.min, Math.min(limits.max, val));
+
+    if (field === "from") {
+      val = Math.min(val, values.to);
+    } else {
+      val = Math.max(val, values.from);
+    }
+
+    if (val !== values[field]) {
+      onValueChange({ ...values, [field]: val });
+    }
   };
 
   const handleSliderChange = (sliderValue: number | readonly number[]) => {
@@ -62,6 +88,7 @@ export const RangeFilterSection: React.FC<Props> = ({
           value={String(values.from)}
           disabled={loading || !limits}
           onChange={(e) => handleInputChange("from", e.target.value)}
+          onBlur={() => handleInputBlur("from")}
         />
         <Input
           type="number"
@@ -71,6 +98,7 @@ export const RangeFilterSection: React.FC<Props> = ({
           value={String(values.to)}
           disabled={loading || !limits}
           onChange={(e) => handleInputChange("to", e.target.value)}
+          onBlur={() => handleInputBlur("to")}
         />
       </div>
 
@@ -81,8 +109,8 @@ export const RangeFilterSection: React.FC<Props> = ({
         max={limits?.max ?? 0}
         step={step}
         value={[
-          getValidValue(values.from, true),
-          getValidValue(values.to, false),
+          getValidValue(values.from, "from"),
+          getValidValue(values.to, "to"),
         ]}
         onValueChange={handleSliderChange}
       />

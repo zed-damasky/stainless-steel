@@ -18,7 +18,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [products, setProducts] = React.useState<Product[]>([]);
 
-  const resultsQuantity = 5;
+  const resultsQuantity = 15;
 
   const ref = React.useRef(null);
 

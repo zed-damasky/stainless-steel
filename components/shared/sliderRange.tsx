@@ -63,7 +63,9 @@ const SliderRange = React.forwardRef<HTMLDivElement, SliderRangeProps>(
     const range = safeMax - safeMin;
 
     return (
+      
       <div ref={ref} className={cn("relative w-full", className)}>
+        {/*
         {showLabels && range > 0 && (
           <div className="absolute inset-x-0 top-0 pointer-events-none">
             {displayValue.map((val, index) => {
@@ -78,7 +80,7 @@ const SliderRange = React.forwardRef<HTMLDivElement, SliderRangeProps>(
               );
             })}
           </div>
-        )}
+        )}*/}
 
         <Slider
           min={safeMin}

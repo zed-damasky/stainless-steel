@@ -6,14 +6,23 @@ export interface FilterItem {
   name: string;
 }
 
+interface UseFilterOptionsParams<T> {
+  fetchFn: () => Promise<T[]>;
+  initialSelectedIds?: string[];
+}
+
 export const useFilterOptions = <
   T extends { id: string | number; name: string },
->(
-  fetchFn: () => Promise<T[]>,
-) => {
+>({
+  fetchFn,
+  initialSelectedIds,
+}: UseFilterOptionsParams<T>) => {
   const [items, setItems] = React.useState<FilterItem[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [selectedIds, { toggle }] = useSet(new Set<string>());
+
+  const [selectedIds, { toggle }] = useSet(
+    new Set<string>(initialSelectedIds ?? []),
+  );
 
   const fetchFnRef = React.useRef(fetchFn);
   fetchFnRef.current = fetchFn;
