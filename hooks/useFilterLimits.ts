@@ -1,5 +1,5 @@
 import React from "react";
-import { useRangeState } from "@/hooks/useRangeState";
+import { useRangeState } from ".";
 import { Api } from "@/services/apiClient";
 import type { RangeState } from "@/hooks/useInitialFilterState";
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { CheckboxFiltersGroup, Title, RangeFilterSection } from ".";
 import { cn } from "@/lib/utils";
-import { useFilterSide } from "@/hooks/useFilterSide";
+import { useFilterSide } from "@/hooks";
 
 interface Props {
   className?: string;

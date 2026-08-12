@@ -1,5 +1,5 @@
 import React from "react";
-import { useFilterOptions } from "@/hooks/useFilterOptions";
+import { useFilterOptions } from ".";
 
 interface UseCheckboxFilterOptions {
   fetchFn: () => Promise<any[]>;

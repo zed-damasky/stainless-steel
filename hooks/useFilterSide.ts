@@ -1,8 +1,11 @@
 import React from "react";
-import { useCheckboxFilter } from "@/hooks/useCheckboxFilter";
-import { useFilterLimits } from "@/hooks/useFilterLimits";
-import { useFilterUrlSync } from "@/hooks/useFilterUrlSync";
-import { useInitialFilterState } from "@/hooks/useInitialFilterState";
+import {
+  useCheckboxFilter,
+  useFilterLimits,
+  useFilterUrlSync,
+  useInitialFilterState,
+} from ".";
+
 import { Api } from "@/services/apiClient";
 
 export function useFilterSide() {
