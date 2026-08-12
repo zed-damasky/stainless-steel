@@ -1,5 +1,4 @@
 import React from "react";
-import { useSet } from "react-use";
 
 export interface FilterItem {
   id: string;
@@ -20,8 +19,8 @@ export const useFilterOptions = <
   const [items, setItems] = React.useState<FilterItem[]>([]);
   const [loading, setLoading] = React.useState(true);
 
-  const [selectedIds, { toggle }] = useSet(
-    new Set<string>(initialSelectedIds ?? []),
+  const [selectedIds, setSelectedIds] = React.useState<Set<string>>(
+    () => new Set(initialSelectedIds ?? []),
   );
 
   const fetchFnRef = React.useRef(fetchFn);
@@ -51,6 +50,22 @@ export const useFilterOptions = <
     return () => {
       isMounted = false;
     };
+  }, []);
+
+  React.useEffect(() => {
+    setSelectedIds(new Set(initialSelectedIds ?? []));
+  }, [initialSelectedIds]);
+
+  const toggle = React.useCallback((key: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
   }, []);
 
   return { items, loading, selectedIds, onCheck: toggle };
