@@ -3,10 +3,11 @@ import React from "react";
 import { Title } from ".";
 import { Badge, Button } from "../ui";
 import { Plus } from "lucide-react";
+import { getBadgeVariant } from "@/lib/badgeVariant";
 
-interface Tag {
-  text: string;
-  variant: "default" | "secondary" | "destructive" | "outline";
+interface ProductBadge {
+  id?: string;
+  name: string;
 }
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
   price: number;
   imageUrl: string[];
   description: string;
-  tags: Tag[];
+  badges?: ProductBadge[];
   className?: string;
 }
 
@@ -25,12 +26,12 @@ export const ProductCard: React.FC<Props> = ({
   price,
   imageUrl,
   description,
-  tags,
+  badges = [],
   className,
 }) => {
   return (
     <div className={className}>
-      <Link href={`/offers/${id}`}>
+      <Link href={`/product/${id}`}>
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-65">
           <img className="w-53.75 h-53.75" src={imageUrl[0]} alt={name} />
         </div>
@@ -41,20 +42,24 @@ export const ProductCard: React.FC<Props> = ({
           className="mb-1 mt-3 font-bold line-clamp-2"
         />
 
-        {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-2">
-            {tags.map((tag, index) => (
-              <Badge key={index} variant={tag.variant}>
-                {tag.text}
+        {badges.length > 0 && (
+          <div className="mb-2 flex flex-wrap gap-2">
+            {badges.map((badge) => (
+              <Badge
+                key={badge.id ?? badge.name}
+                variant={getBadgeVariant(badge.name)}
+              >
+                {badge.name}
               </Badge>
             ))}
           </div>
         )}
 
-        <p className="text-sm text-gray-400 line-clamp-3"> {description}</p>
-        <div className="flex justify-between items-center mt-4">
+        <p className="text-sm text-gray-400 line-clamp-3">{description}</p>
+
+        <div className="mt-4 flex items-center justify-between">
           <span className="text-xl">
-            <b> {price.toLocaleString("ru-RU")} ₽</b>
+            <b>{price.toLocaleString("ru-RU")} ₽</b>
           </span>
 
           <Button variant="secondary" className="text-base font-bold">

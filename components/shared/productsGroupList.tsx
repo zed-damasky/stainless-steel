@@ -3,50 +3,24 @@
 import React from "react";
 import { ProductCard, Title } from ".";
 import { cn } from "@/lib/utils";
-import { useIntersection } from "react-use";
-import { useCategoryStore } from "@/store/category";
 
 interface Props {
   title: string;
   items: any[]; //todo fix any
   className?: string;
   listClassName?: string;
-  categoryId: number; //todo fix to string
+  categoryId: string;
 }
-
-const tempDescription =
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi at vero dolore hic optio esse repellendus enim quos. Eius doloribus saepe voluptate delectus quas fugiat repellat natus quod dolorum dicta.";
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
-  categoryId,
+  categoryId, // todo delete if not use
   items,
   className,
   listClassName,
 }) => {
-  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
-
-  //todo not use anymore, maybe delete
-  const intersectionRef = React.useRef<HTMLDivElement>(
-    null,
-  ) as React.RefObject<HTMLDivElement>;
-
-  const intersection = useIntersection(intersectionRef, {
-    threshold: 0.35,
-  });
-
-  React.useEffect(() => {
-    if (intersection?.isIntersecting) {
-      setActiveCategoryId(categoryId);
-    }
-  }, [categoryId, intersection?.isIntersecting, title]);
-
   return (
-    <div
-      className={cn("scroll-mt-[16vh]", className)}
-      id={title}
-      ref={intersectionRef}
-    >
+    <div className={cn("scroll-mt-[16vh]", className)} id={title}>
       <Title text={title} size="lg" className="font-extrabold mb-5 " />
 
       <div className={cn("grid grid-cols-3 gap-8", listClassName)}>
@@ -56,9 +30,9 @@ export const ProductsGroupList: React.FC<Props> = ({
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.price}
-            description={tempDescription}
-            tags={product.tags}
+            price={Number(product.price)}
+            description={product.description}
+            badges={product.badges}
           />
         ))}
       </div>
