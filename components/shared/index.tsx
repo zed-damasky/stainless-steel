@@ -13,3 +13,6 @@ export { ProductsGroupList } from "./productsGroupList";
 export { SearchInput } from "./searchInput";
 export { RangeFilterSection } from "./rangeFilterSection";
 export { ProductImage } from "./productImage";
+//export { ProductsSection } from "./server/productsSection";
+export { ProductsSectionSkeleton } from "./productsSectionSkeleton";
+export { Footer } from "./footer";

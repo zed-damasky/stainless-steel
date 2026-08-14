@@ -41,7 +41,7 @@ export default async function ProductPage({
             {product.badges.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {product.badges.map((badge) => (
-                  <Badge key={badge.id} variant={getBadgeVariant(badge.name)}>
+                  <Badge key={badge.id} variant={getBadgeVariant(badge.name)} className="font-extrabold text-md p-4 select-none ">
                     {badge.name}
                   </Badge>
                 ))}

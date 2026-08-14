@@ -14,7 +14,6 @@ interface Props {
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
-  categoryId, // todo delete if not use
   items,
   className,
   listClassName,

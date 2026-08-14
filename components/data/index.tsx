@@ -1,2 +1,2 @@
-export { categoriesProducts } from "./categoriesProducts";
-export { categoriesMetal } from "./categoriesMetal";
+//export { categoriesProducts } from "./categoriesProducts";
+//export { categoriesMetal } from "./categoriesMetal";

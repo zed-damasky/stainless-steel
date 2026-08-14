@@ -5,12 +5,12 @@ import { FilterChecboxProps, FilterCheckbox } from "./filterCheckBox";
 import { Input, Skeleton } from "../ui";
 import { cn } from "@/lib/utils";
 
-type Item = FilterChecboxProps;
+//type Item = ;
 
 interface Props {
   title?: string;
-  items: Item[];
-  defaultItems?: Item[];
+  items: FilterChecboxProps[];
+  defaultItems?: FilterChecboxProps[];
   limit?: number;
   searchInputPlaceholder?: string;
   onCheck?: (id: string) => void;

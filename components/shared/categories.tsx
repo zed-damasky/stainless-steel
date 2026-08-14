@@ -4,14 +4,14 @@
 
 import { cn } from "@/lib/utils";
 import React from "react";
-import { categoriesProducts } from "../data";
+//import { categoriesProducts } from "../data";
 import { useCategoryStore } from "@/store/category";
 
 interface Props {
   className?: string;
 }
 
-const categories = categoriesProducts;
+//const categories = categoriesProducts;
 
 export const Categories: React.FC<Props> = ({ className }) => {
   const categoryActiveId = useCategoryStore((state) => state.activeId);
@@ -23,6 +23,7 @@ export const Categories: React.FC<Props> = ({ className }) => {
         className,
       )}
     >
+      {/*
       {categories.map(({ id, name }, index) => (
         <a
           key={index}
@@ -36,6 +37,7 @@ export const Categories: React.FC<Props> = ({ className }) => {
           <button>{name}</button>
         </a>
       ))}
+         */}
     </div>
   );
 };

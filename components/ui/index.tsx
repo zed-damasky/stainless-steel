@@ -6,3 +6,4 @@ export { Checkbox } from "./checkbox";
 export { Slider } from "./slider";
 export { Badge } from "./badge";
 export { Skeleton } from "./skeleton";
+export { Separator } from "./separator"
