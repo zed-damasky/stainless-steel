@@ -3,10 +3,11 @@
 import React from "react";
 import { ProductCard, Title } from ".";
 import { cn } from "@/lib/utils";
+import { ProductClient } from "@/components/types";
 
 interface Props {
   title: string;
-  items: any[]; //todo fix any
+  items: ProductClient[];
   className?: string;
   listClassName?: string;
   categoryId: string;
@@ -24,15 +25,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 
       <div className={cn("grid grid-cols-3 gap-8", listClassName)}>
         {items.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            imageUrl={product.imageUrl}
-            price={Number(product.price)}
-            description={product.description}
-            badges={product.badges}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

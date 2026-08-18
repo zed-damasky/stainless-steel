@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 interface Props {
@@ -17,10 +17,12 @@ export const ProductImage: React.FC<Props> = ({
   const images = imageUrls ?? [];
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [prevImages, setPrevImages] = useState(images);
 
-  useEffect(() => {
+  if (images !== prevImages) {
+    setPrevImages(images);
     setActiveIndex(0);
-  }, [imageUrls]);
+  }
 
   if (images.length === 0) {
     return (
@@ -35,7 +37,6 @@ export const ProductImage: React.FC<Props> = ({
   }
 
   const safeActiveIndex = activeIndex >= images.length ? 0 : activeIndex;
-
   const activeImage = images[safeActiveIndex];
 
   return (

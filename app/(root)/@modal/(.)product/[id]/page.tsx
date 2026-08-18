@@ -1,9 +1,9 @@
-import { Container, ProductView } from "@/components/shared";
+import { ProductModal } from "@/components/shared";
 import { ProductClient } from "@/components/types";
 import { prisma } from "@/prisma/prisma";
 import { notFound } from "next/navigation";
 
-export default async function ProductPage({
+export default async function ProductModalPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -27,9 +27,5 @@ export default async function ProductPage({
     mass: Number(product.mass),
   } as ProductClient;
 
-  return (
-    <Container className="my-4">
-      <ProductView product={clientProduct} />
-    </Container>
-  );
+  return <ProductModal product={clientProduct} />;
 }

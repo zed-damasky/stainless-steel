@@ -1,5 +1,4 @@
 "use client";
-//todo fix max value
 
 import React from "react";
 import type { ComponentProps } from "react";
@@ -7,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Skeleton, Slider } from "../ui";
 
 type SliderRangeProps = ComponentProps<typeof Slider> & {
-  // formatLabel?: (value: number) => string;
   loading?: boolean;
   showLabels?: boolean;
 };
@@ -19,11 +17,9 @@ const SliderRange = React.forwardRef<HTMLDivElement, SliderRangeProps>(
       min: rawMin = 0,
       max: rawMax = 100,
       step: rawStep = 1,
-      //formatLabel,
       value,
       onValueChange,
       loading = false,
-      showLabels = true,
       disabled,
       ...props
     },
@@ -60,28 +56,8 @@ const SliderRange = React.forwardRef<HTMLDivElement, SliderRangeProps>(
       return [safeMin, safeMax];
     })();
 
-    const range = safeMax - safeMin;
-
     return (
-      
       <div ref={ref} className={cn("relative w-full", className)}>
-        {/*
-        {showLabels && range > 0 && (
-          <div className="absolute inset-x-0 top-0 pointer-events-none">
-            {displayValue.map((val, index) => {
-              const percentage = ((val - safeMin) / range) * 100;
-
-              return (
-                <div
-                  key={index}
-                  className="absolute text-center -translate-x-1/2"
-                  style={{ left: `${percentage}%` }}
-                ></div>
-              );
-            })}
-          </div>
-        )}*/}
-
         <Slider
           min={safeMin}
           max={safeMax}

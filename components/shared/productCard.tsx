@@ -1,34 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { Title } from ".";
 import { Badge, Button } from "../ui";
 import { Plus } from "lucide-react";
 import { getBadgeVariant } from "@/lib/badgeVariant";
-
-interface ProductBadge {
-  id?: string;
-  name: string;
-}
+import { ProductClient } from "@/components/types";
 
 interface Props {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string[];
-  description: string;
-  badges?: ProductBadge[];
+  product: ProductClient;
   className?: string;
 }
 
-export const ProductCard: React.FC<Props> = ({
-  id,
-  name,
-  price,
-  imageUrl,
-  description,
-  badges = [],
-  className,
-}) => {
+export const ProductCard: React.FC<Props> = ({ product, className }) => {
+  const { id, name, price, imageUrl, description, badges } = product;
+
   return (
     <div className={className}>
       <Link href={`/product/${id}`}>
@@ -49,10 +36,7 @@ export const ProductCard: React.FC<Props> = ({
         {badges.length > 0 && (
           <div className="mb-2 flex flex-wrap gap-2">
             {badges.map((badge) => (
-              <Badge
-                key={badge.id ?? badge.name}
-                variant={getBadgeVariant(badge.name)}
-              >
+              <Badge key={badge.id} variant={getBadgeVariant(badge.name)}>
                 {badge.name}
               </Badge>
             ))}
@@ -63,7 +47,7 @@ export const ProductCard: React.FC<Props> = ({
 
         <div className="mt-4 flex items-center justify-between">
           <span className="text-xl">
-            <b>{price.toLocaleString("ru-RU")} ₽</b>
+            <b>{Number(price).toLocaleString("ru-RU")} ₽</b>
           </span>
 
           <Button variant="secondary" className="text-base font-bold">

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { Header } from "@/components/shared";
 
 export const metadata: Metadata = {
@@ -11,13 +9,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <main className="min-h-screen">
       <Header />
       {children}
+      {modal}
     </main>
   );
 }

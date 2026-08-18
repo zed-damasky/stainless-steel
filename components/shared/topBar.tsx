@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Container } from ".";
-import { Categories, SortPopup } from ".";
+import { SortPopup } from ".";
 
 
 interface Props {
@@ -20,8 +20,6 @@ export const TopBar: React.FC<Props> = ({ className }) => {
       )}
     >
       <Container>
-       {/* todo delete, not use
-       <Categories />*/} 
         <SortPopup />
       </Container>
     </div>

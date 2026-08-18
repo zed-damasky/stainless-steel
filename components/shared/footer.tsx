@@ -13,6 +13,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
           <div className="flex items-center gap-6">
             <span className="font-semibold">Stainless Steel</span>
             <nav className="hidden md:flex gap-4 text-sm text-muted-foreground">
+              {/* 
               <a
                 href="/about"
                 className="hover:text-foreground transition-colors"
@@ -31,6 +32,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
               >
                 Контакты
               </a>
+              */}
             </nav>
           </div>
 
