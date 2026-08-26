@@ -1,9 +1,8 @@
 "use client";
 
-import { ProductImage, Title } from "@/components/shared";
-import { Badge, Button } from "@/components/ui";
+import { AddToCartButton, ProductImage, Title } from "@/components/shared";
+import { Badge } from "@/components/ui";
 import { getBadgeVariant } from "@/lib/badgeVariant";
-import { Plus } from "lucide-react";
 import { ProductClient } from "@/components/types";
 
 interface Props {
@@ -61,12 +60,9 @@ export const ProductView: React.FC<Props> = ({ product, className }) => {
             </p>
           </div>
 
-          <Button
-            variant="secondary"
-            className="w-full text-base font-bold sm:w-auto"
-          >
-            <Plus size={20} className="mr-1" />В корзину
-          </Button>
+          <AddToCartButton
+            product={product} 
+            className="w-full text-base font-bold sm:w-auto"          />
         </div>
 
         <section className="rounded-2xl border p-6">

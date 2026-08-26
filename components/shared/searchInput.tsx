@@ -77,7 +77,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
             <Link
               onClick={onClickItem}
               key={product.id}
-              href={`/product/${product.id} `}
+              href={`/product/${product.id}`}
             >
               <div className="px-3 py-2 hover:bg-primary/20 cursor-pointer">
                 {product.name}

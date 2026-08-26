@@ -14,5 +14,10 @@ export { RangeFilterSection } from "./rangeFilterSection";
 export { ProductImage } from "./productImage";
 export { ProductsSectionSkeleton } from "./productsSectionSkeleton";
 export { Footer } from "./footer";
-export * from "./modals";
 export { ProductView } from "./productView";
+export { AddToCartButton } from "./addToCartButton";
+export { CartButton } from "./cartButton";
+export { CartView } from "./cartView";
+export { CartViewItem } from "./cartViewItem";
+
+export * from "./modals";

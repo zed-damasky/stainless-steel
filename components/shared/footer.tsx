@@ -7,13 +7,13 @@ interface Props {
 
 export const Footer: React.FC<Props> = ({ className }) => {
   return (
-    <footer className={cn("border-t bg-muted/50 mt-auto", className)}>
+    <footer className={cn("border-t bg-muted/50 my-10", className)}>
       <div className="container mx-auto px-6 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-6">
             <span className="font-semibold">Stainless Steel</span>
             <nav className="hidden md:flex gap-4 text-sm text-muted-foreground">
-              {/* 
+              {/* todo remake to Link
               <a
                 href="/about"
                 className="hover:text-foreground transition-colors"

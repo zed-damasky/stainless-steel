@@ -5,7 +5,8 @@ import {
   Category,
 } from "@/lib/generated/prisma/client";
 
-export type ProductClient = Omit<Product, "price" | "mass"> & {
+export type ProductClient = Omit<Product, "price" | "mass"| "quantity"> & {
+  quantity: number;
   price: number;
   mass: number;
   badges: Badge[];

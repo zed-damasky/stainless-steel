@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import {
   Container,
   FilterSide,
-  Footer,
   ProductsSectionSkeleton,
   TopBar,
 } from "@/components/shared";
@@ -28,7 +27,6 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <Footer />
     </>
   );
 }

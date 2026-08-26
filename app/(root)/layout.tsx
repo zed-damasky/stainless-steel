@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/shared";
+import { Footer, Header } from "@/components/shared";
 
 export const metadata: Metadata = {
   title: "Нержавеющая сталь и не только",
@@ -19,6 +19,7 @@ export default function RootLayout({
       <Header />
       {children}
       {modal}
+      <Footer />
     </main>
   );
 }
