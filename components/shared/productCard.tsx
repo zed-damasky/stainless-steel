@@ -89,7 +89,6 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
           </span>
 
           <AddToCartButton
-            productId={id}
             product={product} 
             className="text-base font-bold"
             preventedClick
