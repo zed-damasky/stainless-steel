@@ -19,5 +19,6 @@ export { AddToCartButton } from "./addToCartButton";
 export { CartButton } from "./cartButton";
 export { CartView } from "./cartView";
 export { CartViewItem } from "./cartViewItem";
+export { FiltersSkeleton } from "./filtersSkeleton";
 
 export * from "./modals";

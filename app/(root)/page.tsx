@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import {
   Container,
   FilterSide,
+  FiltersSkeleton,
   ProductsSectionSkeleton,
   TopBar,
 } from "@/components/shared";
@@ -17,7 +18,9 @@ export default function Home() {
       <Container className="mt-10 pb-14px">
         <div className="flex gap-15">
           <div className="w-62.5">
-            <FilterSide />
+            <Suspense fallback={<FiltersSkeleton />}>
+              <FilterSide />
+            </Suspense>
           </div>
 
           <div className="flex-1">
