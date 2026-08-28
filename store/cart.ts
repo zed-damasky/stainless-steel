@@ -1,17 +1,20 @@
 import { create } from "zustand";
 import { ProductClient } from "@/components/types";
 
-//todo use prisma type
-interface CartItem extends ProductClient {
+export interface CartItem extends ProductClient {
   cartId: string;
 }
 
 interface CartState {
   items: CartItem[];
-  addItem: (product: ProductClient) => void;
-  removeItem: (cartId: string) => void;
-  removeItemByProductId: (productId: string) => void;
+  isLoading: boolean;
+
+  fetchCart: () => Promise<void>;
+  addItem: (product: ProductClient) => Promise<void>;
+  removeItem: (cartId: string) => Promise<void>;
+  removeItemByProductId: (productId: string) => Promise<void>;
   clearCart: () => void;
+
   totalAmount: () => number;
   totalItems: () => number;
   hasItem: (productId: string) => boolean;
@@ -19,31 +22,67 @@ interface CartState {
 
 export const useCartStore = create<CartState>((set, get) => ({
   items: [],
+  isLoading: false,
 
-  addItem: (product) =>
+  fetchCart: async () => {
+    set({ isLoading: true });
+    try {
+      const res = await fetch("/api/cart");
+      const data = await res.json();
+      set({ items: data.items || [], isLoading: false });
+    } catch (error) {
+      console.error("Failed to fetch cart", error);
+      set({ isLoading: false });
+    }
+  },
+
+  addItem: async (product) => {
     set((state) => {
       const existingItem = state.items.find((item) => item.id === product.id);
-
-      if (existingItem) {
-        return state;
-      }
+      if (existingItem) return state;
 
       return {
         items: [...state.items, { ...product, cartId: crypto.randomUUID() }],
       };
-    }),
+    });
 
-  removeItem: (cartId) =>
+    try {
+      await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: product.id }),
+      });
+    } catch (error) {
+      console.error("Failed to add to cart", error);
+    }
+  },
+
+  removeItem: async (cartId) => {
     set((state) => ({
       items: state.items.filter((item) => item.cartId !== cartId),
-    })),
+    }));
 
-  removeItemByProductId: (productId) =>
-    set((state) => ({
-      items: state.items.filter((item) => item.id !== productId),
-    })),
+    try {
+      await fetch("/api/cart", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartId }),
+      });
+    } catch (error) {
+      console.error("Failed to remove from cart", error);
+    }
+  },
 
-  clearCart: () => set({ items: [] }),
+  removeItemByProductId: async (productId) => {
+    const itemToRemove = get().items.find((item) => item.id === productId);
+    if (itemToRemove) {
+      await get().removeItem(itemToRemove.cartId);
+    }
+  },
+
+  clearCart: () => {
+    set({ items: [] });
+  },
 
   totalAmount: () =>
     get().items.reduce((sum, item) => sum + Number(item.price), 0),

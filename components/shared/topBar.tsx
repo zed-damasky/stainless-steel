@@ -1,14 +1,10 @@
-//todo relocate categories into filters, remove categories from topbar
-
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Container } from ".";
 import { SortPopup } from ".";
 
-
 interface Props {
   className?: string;
-
 }
 
 export const TopBar: React.FC<Props> = ({ className }) => {

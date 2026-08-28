@@ -2,7 +2,7 @@ import React from "react";
 import { ProductClient } from "../types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 
 interface Props {
   product: ProductClient;
@@ -56,7 +56,7 @@ export const CartViewItem: React.FC<Props> = ({
               className="flex h-10 w-10 items-center justify-center rounded-md text-red-500 hover:bg-red-50 transition-colors"
               title="Удалить из корзины"
             >
-              <Trash2 size={20} />
+              <X size={20} />
             </button>
           )}
         </div>

@@ -2,8 +2,8 @@ import { prisma } from "@/prisma/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const materials = await prisma.product.findMany();
-  return NextResponse.json(materials);
+  const products = await prisma.product.findMany();
+  return NextResponse.json(products);
 }
 export async function POST() {
   

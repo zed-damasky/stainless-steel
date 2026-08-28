@@ -67,7 +67,7 @@ async function put() {
       data: productAlloySteelCircle,
     });
   }
-
+/*
   for (const cart of cartsMock) {
     await prisma.cart.create({
       data: cart,
@@ -90,7 +90,7 @@ async function put() {
       cartId: cart.id,
       quantity: 5,
     },
-  });
+  });*/
 }
 
 /*
