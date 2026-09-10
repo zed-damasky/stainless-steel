@@ -3,7 +3,7 @@
 import { AddToCartButton, ProductImage, Title } from "@/components/shared";
 import { Badge } from "@/components/ui";
 import { getBadgeVariant } from "@/lib/badgeVariant";
-import { ProductClient } from "@/components/types";
+import { CartItem, ProductClient } from "@/components/types";
 
 interface Props {
   product: ProductClient;

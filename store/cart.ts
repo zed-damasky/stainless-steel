@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { CartItem } from "@/components/types";
+import { CartItem, ProductClient } from "@/components/types";
 
 interface CartState {
   items: CartItem[];
   isLoading: boolean;
 
   fetchCart: () => Promise<void>;
-  addItem: (product: CartItem) => Promise<void>;
+  addItem: (product: ProductClient) => Promise<void>;
   removeItem: (cartItemId: string) => Promise<void>;
   removeItemByProductId: (productId: string) => Promise<void>;
   clearCart: () => void;
