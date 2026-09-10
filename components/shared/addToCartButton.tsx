@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui";
 import { Plus, Trash2 } from "lucide-react";
-import { ProductClient } from "../types";
+import { CartItem } from "../types";
 import { useCartStore } from "@/store/cart";
 
 interface Props {
-  product: ProductClient;
+  product: CartItem;
   className?: string;
   preventedClick?: boolean;
 }
