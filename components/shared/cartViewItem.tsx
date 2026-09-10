@@ -1,11 +1,11 @@
 import React from "react";
-import { ProductClient } from "../types";
+import { CartItem, ProductClient } from "../types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { X } from "lucide-react";
 
 interface Props {
-  product: ProductClient;
+  product: CartItem;
   onRemove?: () => void;
   className?: string;
 }
@@ -15,11 +15,11 @@ export const CartViewItem: React.FC<Props> = ({
   onRemove,
   className,
 }) => {
-  const { id, name, price, quantity, material, category, imageUrl } = product;
+  const { productId, name, price, quantity, material, category, imageUrl } = product;
 
   return (
     <div className={cn("flex gap-4 border-b border-gray-200 py-4", className)}>
-      <Link href={`/product/${id}`} className="shrink-0">
+      <Link href={`/product/${productId}`} className="shrink-0">
         <div className="relative h-24 w-24 rounded-lg bg-secondary flex items-center justify-center overflow-hidden">
           <img
             src={imageUrl[0]}
@@ -30,7 +30,7 @@ export const CartViewItem: React.FC<Props> = ({
       </Link>
 
       <div className="flex flex-1 flex-col gap-1 min-w-0">
-        <Link href={`/product/${id}`} className="hover:underline">
+        <Link href={`/product/${productId}`} className="hover:underline">
           <h3 className="font-semibold text-sm line-clamp-2 leading-tight">
             {name}
           </h3>

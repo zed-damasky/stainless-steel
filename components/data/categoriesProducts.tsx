@@ -1,3 +1,5 @@
+// todo delete if not use
+
 export interface CategoryProduct {
   id: number;
   name: string;

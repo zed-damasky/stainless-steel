@@ -57,9 +57,9 @@ export const CartView: React.FC<React.PropsWithChildren<Props>> = ({
             <div className="space-y-0">
               {items.map((item) => (
                 <CartViewItem
-                  key={item.cartId}
+                  key={item.id}
                   product={item}
-                  onRemove={() => removeItem(item.cartId)}
+                  onRemove={() => removeItem(item.id)}
                 />
               ))}
             </div>

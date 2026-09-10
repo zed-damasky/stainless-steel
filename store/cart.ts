@@ -1,17 +1,13 @@
 import { create } from "zustand";
-import { ProductClient } from "@/components/types";
-
-export interface CartItem extends ProductClient {
-  cartId: string;
-}
+import { CartItem } from "@/components/types";
 
 interface CartState {
   items: CartItem[];
   isLoading: boolean;
 
   fetchCart: () => Promise<void>;
-  addItem: (product: ProductClient) => Promise<void>;
-  removeItem: (cartId: string) => Promise<void>;
+  addItem: (product: CartItem) => Promise<void>;
+  removeItem: (cartItemId: string) => Promise<void>;
   removeItemByProductId: (productId: string) => Promise<void>;
   clearCart: () => void;
 
@@ -37,36 +33,56 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   addItem: async (product) => {
+    const tempId = crypto.randomUUID();
+
     set((state) => {
-      const existingItem = state.items.find((item) => item.id === product.id);
+      const existingItem = state.items.find(
+        (item) => item.productId === product.id,
+      );
       if (existingItem) return state;
 
       return {
-        items: [...state.items, { ...product, cartId: crypto.randomUUID() }],
+        items: [
+          ...state.items,
+          { ...product, id: tempId, productId: product.id, cartId: "temp" },
+        ],
       };
     });
 
     try {
-      await fetch("/api/cart", {
+      const res = await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId: product.id }),
       });
+      const data = await res.json();
+
+      if (data.item) {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.id === tempId ? data.item : item,
+          ),
+        }));
+      }
     } catch (error) {
       console.error("Failed to add to cart", error);
+
+      set((state) => ({
+        items: state.items.filter((item) => item.id !== tempId),
+      }));
     }
   },
 
-  removeItem: async (cartId) => {
+  removeItem: async (cartItemId) => {
     set((state) => ({
-      items: state.items.filter((item) => item.cartId !== cartId),
+      items: state.items.filter((item) => item.id !== cartItemId),
     }));
 
     try {
       await fetch("/api/cart", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartId }),
+        body: JSON.stringify({ cartItemId }),
       });
     } catch (error) {
       console.error("Failed to remove from cart", error);
@@ -74,9 +90,11 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   removeItemByProductId: async (productId) => {
-    const itemToRemove = get().items.find((item) => item.id === productId);
+    const itemToRemove = get().items.find(
+      (item) => item.productId === productId,
+    );
     if (itemToRemove) {
-      await get().removeItem(itemToRemove.cartId);
+      await get().removeItem(itemToRemove.id);
     }
   },
 
@@ -89,5 +107,6 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   totalItems: () => get().items.length,
 
-  hasItem: (productId) => get().items.some((item) => item.id === productId),
+  hasItem: (productId) =>
+    get().items.some((item) => item.productId === productId),
 }));

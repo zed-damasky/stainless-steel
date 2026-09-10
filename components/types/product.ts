@@ -13,3 +13,9 @@ export type ProductClient = Omit<Product, "price" | "mass"| "quantity"> & {
   material: Material | null;
   category?: Category | null;
 };
+
+export interface CartItem extends ProductClient {
+  id: string;
+  cartId: string;
+  productId: string;
+}

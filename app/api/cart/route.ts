@@ -23,8 +23,10 @@ export async function GET(req: NextRequest) {
   }
 
   const items = cart.cartItems.map((ci) => ({
-    cartId: ci.id,
     ...ci.product,
+    id: ci.id,
+    cartId: ci.cartId,
+    productId: ci.productId,
   }));
 
   return NextResponse.json({ items });
@@ -46,20 +48,32 @@ export async function POST(req: NextRequest) {
     cart = await prisma.cart.create({ data: { token } });
   }
 
-  const existingItem = await prisma.cartItem.findFirst({
+  let cartItem = await prisma.cartItem.findFirst({
     where: { cartId: cart.id, productId },
+    include: { product: true },
   });
 
-  if (!existingItem) {
-    await prisma.cartItem.create({
+  if (!cartItem) {
+    cartItem = await prisma.cartItem.create({
       data: {
         cartId: cart.id,
         productId,
       },
+      include: { product: true },
     });
   }
 
-  const response = NextResponse.json({ success: true });
+  const responseItem = {
+    ...cartItem.product,
+    id: cartItem.id,
+    cartId: cartItem.cartId,
+    productId: cartItem.productId,
+  };
+
+  const response = NextResponse.json({
+    success: true,
+    item: responseItem,
+  });
 
   if (isNewToken) {
     response.cookies.set("cartToken", token, {
@@ -78,12 +92,15 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: "No token" }, { status: 401 });
   }
 
-  const { cartId } = await req.json();
+  const { cartItemId } = await req.json();
 
   const cart = await prisma.cart.findFirst({ where: { token } });
   if (cart) {
     await prisma.cartItem.delete({
-      where: { id: cartId },
+      where: {
+        id: cartItemId,
+        cartId: cart.id,
+      },
     });
   }
 

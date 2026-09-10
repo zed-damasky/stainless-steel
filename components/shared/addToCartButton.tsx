@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui";
 import { Plus, Trash2 } from "lucide-react";
 import { ProductClient } from "../types";
@@ -21,6 +21,12 @@ export const AddToCartButton: React.FC<Props> = ({
   const hasItem = useCartStore((s) => s.hasItem(product.id));
   const removeItemByProductId = useCartStore((s) => s.removeItemByProductId);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (preventedClick) {
       e.preventDefault();
@@ -34,22 +40,14 @@ export const AddToCartButton: React.FC<Props> = ({
     }
   };
 
-  if (hasItem) {
-    return (
-      <Button
-        variant={"destructive"}
-        className={className}
-        onClick={handleClick}
-      >
-        <Trash2 size={20} />
-        Удалить из корзины
-      </Button>
-    );
-  }
-
   return (
-    <Button variant={"secondary"} className={className} onClick={handleClick}>
-      <Plus size={20} />В корзину
+    <Button
+      variant={isMounted && hasItem ? "destructive" : "secondary"}
+      className={className}
+      onClick={handleClick}
+    >
+      {isMounted && hasItem ? <Trash2 size={20} /> : <Plus size={20} />}
+      {isMounted && hasItem ? "Удалить из корзины" : "В корзину"}
     </Button>
   );
 };
