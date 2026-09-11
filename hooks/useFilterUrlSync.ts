@@ -27,45 +27,49 @@ export function useFilterUrlSync({
 }: UseFilterUrlSyncOptions) {
   const router = useRouter();
   const pathname = usePathname();
-  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const rangeTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   React.useEffect(() => {
-    if (limitsLoading) return;
-    if (!shouldSyncRef.current) return;
+    if (limitsLoading || !shouldSyncRef.current) return;
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    shouldSyncRef.current = false;
 
-    timeoutRef.current = setTimeout(() => {
-      shouldSyncRef.current = false;
+    const instantFilters = {
+      badges:
+        selectedBadgeIds.size > 0 ? Array.from(selectedBadgeIds) : undefined,
+      materials:
+        selectedMaterialIds.size > 0
+          ? Array.from(selectedMaterialIds)
+          : undefined,
+      categories:
+        selectedCategoryIds.size > 0
+          ? Array.from(selectedCategoryIds)
+          : undefined,
+    };
 
-      const priceChanged =
-        !!priceLimits &&
-        (price.priceFrom !== priceLimits.min ||
-          price.priceTo !== priceLimits.max);
+    const priceChanged =
+      !!priceLimits &&
+      (price.priceFrom !== priceLimits.min ||
+        price.priceTo !== priceLimits.max);
+    const quantityChanged =
+      !!quantityLimits &&
+      (quantity.quantityFrom !== quantityLimits.min ||
+        quantity.quantityTo !== quantityLimits.max);
 
-      const quantityChanged =
-        !!quantityLimits &&
-        (quantity.quantityFrom !== quantityLimits.min ||
-          quantity.quantityTo !== quantityLimits.max);
+    if (rangeTimeoutRef.current) clearTimeout(rangeTimeoutRef.current);
 
-      const filters = {
+    rangeTimeoutRef.current = setTimeout(() => {
+      const rangeFilters = {
         price: priceChanged ? price : undefined,
         quantity: quantityChanged ? quantity : undefined,
-        badges:
-          selectedBadgeIds.size > 0 ? Array.from(selectedBadgeIds) : undefined,
-        materials:
-          selectedMaterialIds.size > 0
-            ? Array.from(selectedMaterialIds)
-            : undefined,
-        categories:
-          selectedCategoryIds.size > 0
-            ? Array.from(selectedCategoryIds)
-            : undefined,
       };
 
-      const queryString = qs.stringify(filters, {
+      const allFilters = { ...instantFilters, ...rangeFilters };
+
+      const queryString = qs.stringify(allFilters, {
         arrayFormat: "comma",
         skipNulls: true,
       });
@@ -73,12 +77,21 @@ export function useFilterUrlSync({
       router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
         scroll: false,
       });
-    }, 300);
+    }, 100);
+
+    const instantQueryString = qs.stringify(instantFilters, {
+      arrayFormat: "comma",
+      skipNulls: true,
+    });
+
+    if (instantQueryString) {
+      router.replace(`${pathname}?${instantQueryString}`, { scroll: false });
+    } else if (!priceChanged && !quantityChanged) {
+      router.replace(pathname, { scroll: false });
+    }
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (rangeTimeoutRef.current) clearTimeout(rangeTimeoutRef.current);
     };
   }, [
     selectedMaterialIds,
