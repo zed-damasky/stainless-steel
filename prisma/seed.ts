@@ -4,11 +4,7 @@ import {
   categoriesMetal,
   categoriesProducts,
   badge,
-  productStainlessSteelCircleMock,
-  productStainlessSteelQuadMock,
-  productAlloySteelQuadMock,
-  productAlloySteelCircleMock,
-  cartsMock,
+  mockProducts,
 } from "./constants";
 import { hashSync } from "bcrypt";
 
@@ -44,6 +40,16 @@ async function put() {
     data: badge,
   });
 
+  const allProducts = mockProducts.flat();
+  await Promise.all(
+    allProducts.map((product) =>
+      prisma.product.create({
+        data: product,
+      }),
+    ),
+  );
+
+  /*
   for (const productStainlessSteelCircle of productStainlessSteelCircleMock) {
     await prisma.product.create({
       data: productStainlessSteelCircle,

@@ -11,7 +11,6 @@ interface UseFilterUrlSyncOptions {
   priceLimits: { min: number; max: number } | null;
   quantityLimits: { min: number; max: number } | null;
   limitsLoading: boolean;
-  shouldSyncRef: React.RefObject<boolean>;
 }
 
 export function useFilterUrlSync({
@@ -23,51 +22,35 @@ export function useFilterUrlSync({
   priceLimits,
   quantityLimits,
   limitsLoading,
-  shouldSyncRef,
 }: UseFilterUrlSyncOptions) {
   const router = useRouter();
   const pathname = usePathname();
-
-  const rangeTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isInitialMount = React.useRef(true);
 
   React.useEffect(() => {
-    if (limitsLoading || !shouldSyncRef.current) return;
+    if (limitsLoading) return;
 
-    shouldSyncRef.current = false;
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
 
-    const instantFilters = {
-      badges:
-        selectedBadgeIds.size > 0 ? Array.from(selectedBadgeIds) : undefined,
-      materials:
-        selectedMaterialIds.size > 0
-          ? Array.from(selectedMaterialIds)
-          : undefined,
-      categories:
-        selectedCategoryIds.size > 0
-          ? Array.from(selectedCategoryIds)
-          : undefined,
-    };
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-    const priceChanged =
-      !!priceLimits &&
-      (price.priceFrom !== priceLimits.min ||
-        price.priceTo !== priceLimits.max);
-    const quantityChanged =
-      !!quantityLimits &&
-      (quantity.quantityFrom !== quantityLimits.min ||
-        quantity.quantityTo !== quantityLimits.max);
+    timeoutRef.current = setTimeout(() => {
+      const priceChanged = !!priceLimits && (price.priceFrom !== priceLimits.min || price.priceTo !== priceLimits.max);
+      const quantityChanged = !!quantityLimits && (quantity.quantityFrom !== quantityLimits.min || quantity.quantityTo !== quantityLimits.max);
 
-    if (rangeTimeoutRef.current) clearTimeout(rangeTimeoutRef.current);
-
-    rangeTimeoutRef.current = setTimeout(() => {
-      const rangeFilters = {
-        price: priceChanged ? price : undefined,
-        quantity: quantityChanged ? quantity : undefined,
+      const allFilters = {
+        badges: selectedBadgeIds.size > 0 ? Array.from(selectedBadgeIds) : undefined,
+        materials: selectedMaterialIds.size > 0 ? Array.from(selectedMaterialIds) : undefined,
+        categories: selectedCategoryIds.size > 0 ? Array.from(selectedCategoryIds) : undefined,
+        priceFrom: priceChanged ? price.priceFrom : undefined,
+        priceTo: priceChanged ? price.priceTo : undefined,
+        quantityFrom: quantityChanged ? quantity.quantityFrom : undefined,
+        quantityTo: quantityChanged ? quantity.quantityTo : undefined,
       };
-
-      const allFilters = { ...instantFilters, ...rangeFilters };
 
       const queryString = qs.stringify(allFilters, {
         arrayFormat: "comma",
@@ -77,33 +60,13 @@ export function useFilterUrlSync({
       router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
         scroll: false,
       });
-    }, 100);
-
-    const instantQueryString = qs.stringify(instantFilters, {
-      arrayFormat: "comma",
-      skipNulls: true,
-    });
-
-    if (instantQueryString) {
-      router.replace(`${pathname}?${instantQueryString}`, { scroll: false });
-    } else if (!priceChanged && !quantityChanged) {
-      router.replace(pathname, { scroll: false });
-    }
+    }, 300);
 
     return () => {
-      if (rangeTimeoutRef.current) clearTimeout(rangeTimeoutRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [
-    selectedMaterialIds,
-    selectedCategoryIds,
-    selectedBadgeIds,
-    price,
-    quantity,
-    router,
-    limitsLoading,
-    pathname,
-    priceLimits,
-    quantityLimits,
-    shouldSyncRef,
+    selectedMaterialIds, selectedCategoryIds, selectedBadgeIds,
+    price, quantity, router, limitsLoading, pathname, priceLimits, quantityLimits,
   ]);
 }

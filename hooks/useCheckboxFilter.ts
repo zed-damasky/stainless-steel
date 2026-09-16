@@ -1,32 +1,19 @@
 import React from "react";
 import { useFilterOptions } from ".";
 
-interface UseCheckboxFilterOptions {
-  fetchFn: () => Promise<any[]>;
-  onChange: () => void;
+interface UseCheckboxFilterOptions<T> {
+  fetchFn: () => Promise<T[]>;
   initialSelectedIds?: string[];
 }
 
-export function useCheckboxFilter<
-  T extends { id: string | number; name: string },
->({ fetchFn, onChange, initialSelectedIds }: UseCheckboxFilterOptions) {
+export function useCheckboxFilter<T extends { id: string | number; name: string }>({
+  fetchFn,
+  initialSelectedIds,
+}: UseCheckboxFilterOptions<T>) {
   const { items, loading, selectedIds, onCheck } = useFilterOptions<T>({
     fetchFn,
     initialSelectedIds,
   });
 
-  const handleCheck = React.useCallback(
-    (id: string) => {
-      onChange();
-      onCheck(id);
-    },
-    [onChange, onCheck],
-  );
-
-  return {
-    items,
-    loading,
-    selectedIds,
-    onCheck: handleCheck,
-  };
+  return { items, loading, selectedIds, onCheck };
 }

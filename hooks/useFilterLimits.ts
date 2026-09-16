@@ -1,26 +1,23 @@
 import React from "react";
 import { useRangeState } from ".";
 import { Api } from "@/services/apiClient";
-import type { RangeState } from "@/hooks/useInitialFilterState";
+import type { RangeState } from ".";
 
 interface PriceRangeProps {
   priceFrom: number;
   priceTo: number;
 }
-
 interface QuantityRangeProps {
   quantityFrom: number;
   quantityTo: number;
 }
 
 interface UseFilterLimitsOptions {
-  onChange: () => void;
   initialPrice?: RangeState;
   initialQuantity?: RangeState;
 }
 
 export function useFilterLimits({
-  onChange,
   initialPrice,
   initialQuantity,
 }: UseFilterLimitsOptions) {
@@ -30,12 +27,10 @@ export function useFilterLimits({
     min: number;
     max: number;
   } | null>(null);
-
   const [quantityLimits, setQuantityLimits] = React.useState<{
     min: number;
     max: number;
   } | null>(null);
-
   const [limitsLoading, setLimitsLoading] = React.useState(true);
 
   const [price, updatePrice, updatePriceFields] =
@@ -51,25 +46,15 @@ export function useFilterLimits({
     });
 
   const handlePriceChange = React.useCallback(
-    (vals: { from: number; to: number }) => {
-      onChange();
-      updatePriceFields({
-        priceFrom: vals.from,
-        priceTo: vals.to,
-      });
-    },
-    [onChange, updatePriceFields],
+    (vals: { from: number; to: number }) =>
+      updatePriceFields({ priceFrom: vals.from, priceTo: vals.to }),
+    [updatePriceFields],
   );
 
   const handleQuantityChange = React.useCallback(
-    (vals: { from: number; to: number }) => {
-      onChange();
-      updateQuantityFields({
-        quantityFrom: vals.from,
-        quantityTo: vals.to,
-      });
-    },
-    [onChange, updateQuantityFields],
+    (vals: { from: number; to: number }) =>
+      updateQuantityFields({ quantityFrom: vals.from, quantityTo: vals.to }),
+    [updateQuantityFields],
   );
 
   React.useEffect(() => {
@@ -103,11 +88,9 @@ export function useFilterLimits({
     price,
     priceLimits,
     onPriceChange: handlePriceChange,
-
     quantity,
     quantityLimits,
     onQuantityChange: handleQuantityChange,
-
     limitsLoading,
   };
 }

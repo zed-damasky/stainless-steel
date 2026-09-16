@@ -52,10 +52,6 @@ export const useFilterOptions = <
     };
   }, []);
 
-  React.useEffect(() => {
-    setSelectedIds(new Set(initialSelectedIds ?? []));
-  }, [initialSelectedIds]);
-
   const toggle = React.useCallback((key: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);

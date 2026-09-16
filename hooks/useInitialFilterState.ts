@@ -1,5 +1,4 @@
 import { useSearchParams } from "next/navigation";
-import qs from "qs";
 import { useMemo } from "react";
 
 export interface RangeState {
@@ -45,25 +44,6 @@ function parseNumber(value: unknown): number | undefined {
   return num;
 }
 
-function parseRange(
-  obj: unknown,
-  fromKey: string,
-  toKey: string,
-): RangeState | undefined {
-  if (!obj || typeof obj !== "object") return undefined;
-
-  const record = obj as Record<string, unknown>;
-  const from = parseNumber(record[fromKey]);
-  const to = parseNumber(record[toKey]);
-
-  if (from === undefined && to === undefined) return undefined;
-
-  return {
-    from: from ?? 0,
-    to: to ?? 0,
-  };
-}
-
 export function useInitialFilterState(): InitialFilterState {
   const searchParams = useSearchParams();
 
@@ -78,34 +58,27 @@ export function useInitialFilterState(): InitialFilterState {
 
     if (!searchParams) return emptyState;
 
-    const queryString = searchParams.toString();
-    if (!queryString) return emptyState;
-
     try {
-      const parsed = qs.parse(queryString, {
-        ignoreQueryPrefix: true,
-        depth: 3,
-        comma: true,
-      });
+      const badges = parseStringArray(searchParams.get("badges"));
+      const materials = parseStringArray(searchParams.get("materials"));
+      const categories = parseStringArray(searchParams.get("categories"));
 
-      const badges = parseStringArray(parsed.badges);
-      const materials = parseStringArray(parsed.materials);
-      const categories = parseStringArray(parsed.categories);
+      const priceFrom = parseNumber(searchParams.get("priceFrom"));
+      const priceTo = parseNumber(searchParams.get("priceTo"));
+      const quantityFrom = parseNumber(searchParams.get("quantityFrom"));
+      const quantityTo = parseNumber(searchParams.get("quantityTo"));
 
-      const price = parseRange(parsed.price, "priceFrom", "priceTo");
-      const quantity = parseRange(
-        parsed.quantity,
-        "quantityFrom",
-        "quantityTo",
-      );
+      const price =
+        priceFrom !== undefined || priceTo !== undefined
+          ? { from: priceFrom ?? 0, to: priceTo ?? 0 }
+          : undefined;
 
-      return {
-        badges,
-        materials,
-        categories,
-        price,
-        quantity,
-      };
+      const quantity =
+        quantityFrom !== undefined || quantityTo !== undefined
+          ? { from: quantityFrom ?? 0, to: quantityTo ?? 0 }
+          : undefined;
+
+      return { badges, materials, categories, price, quantity };
     } catch (error) {
       console.error("Failed to parse filter state from URL:", error);
       return emptyState;

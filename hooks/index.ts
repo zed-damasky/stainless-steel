@@ -4,4 +4,5 @@ export { useFilterOptions } from "./useFilterOptions";
 export { useFilterSide } from "./useFilterSide";
 export { useFilterUrlSync } from "./useFilterUrlSync";
 export { useInitialFilterState } from "./useInitialFilterState";
+export type { RangeState } from "./useInitialFilterState";
 export { useRangeState } from "./useRangeState";

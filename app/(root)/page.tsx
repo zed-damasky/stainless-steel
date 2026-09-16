@@ -8,7 +8,8 @@ import {
 } from "@/components/shared";
 import { ProductsSection } from "@/components/shared/server-components";
 
-export default function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<any> }) {
+  const params = await searchParams;
   return (
     <>
       <Container className="mt-5">
@@ -25,7 +26,7 @@ export default function Home() {
 
           <div className="flex-1">
             <Suspense fallback={<ProductsSectionSkeleton />}>
-              <ProductsSection />
+              <ProductsSection searchParams={params}/>
             </Suspense>
           </div>
         </div>

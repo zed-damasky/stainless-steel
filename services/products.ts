@@ -7,14 +7,28 @@ export interface ProductStats {
   quantity: { min: number; max: number };
 }
 
-export const getAll = async (): Promise<Product[]> => {
-  return (await axiosInstance.get<Product[]>(ApiRoutes.MATERIAL)).data;
-};
+export interface FilterParams {
+  materials?: string[];
+  badges?: string[];
+  categories?: string[];
+  price?: { priceFrom: number; priceTo: number };
+  quantity?: { quantityFrom: number; quantityTo: number };
+}
 
 export const search = async (query: string): Promise<Product[]> => {
   return (
     await axiosInstance.get<Product[]>(ApiRoutes.SEARCH_PRODUCTS, {
       params: { query },
+    })
+  ).data;
+};
+
+export const getFiltered = async (params: FilterParams): Promise<Product[]> => {
+  return (
+    await axiosInstance.get<Product[]>(ApiRoutes.SEARCH_PRODUCTS, {
+      params,
+      paramsSerializer: (p) =>
+        require("qs").stringify(p, { arrayFormat: "comma", skipNulls: true }),
     })
   ).data;
 };

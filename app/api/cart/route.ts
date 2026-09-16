@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     where: { token },
     include: {
       cartItems: {
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: "asc" },
         include: { product: true },
       },
     },
