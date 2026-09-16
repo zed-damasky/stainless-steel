@@ -51,6 +51,6 @@ export async function filterProducts(params: FilterProductsParams) {
       material: true,
       badges: true,
     },
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: "asc" },
   });
 }
