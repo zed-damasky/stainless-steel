@@ -1,6 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({
   subsets: ["cyrillic"],
@@ -16,7 +17,8 @@ export default function MainLayout({
   return (
     <html lang="ru" className={cn("h-full", "antialiased", roboto.className)}>
       <body>
-          {children}
+        {children}
+        <Toaster />
       </body>
     </html>
   );

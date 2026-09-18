@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { CartItem, ProductClient } from "@/components/types";
+import toast from "react-hot-toast";
 
 interface CartState {
   items: CartItem[];
@@ -27,6 +28,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       const data = await res.json();
       set({ items: data.items || [], isLoading: false });
     } catch (error) {
+      toast.error("Ошибка при загрузке корзины")
       console.error("Failed to fetch cart", error);
       set({ isLoading: false });
     }
@@ -63,8 +65,11 @@ export const useCartStore = create<CartState>((set, get) => ({
             item.id === tempId ? data.item : item,
           ),
         }));
+        toast.success("Продукт добавлен в корзину")
       }
+      
     } catch (error) {
+      toast.error("Ошибка при добавлении продукта в корзину")
       console.error("Failed to add to cart", error);
 
       set((state) => ({
@@ -84,7 +89,9 @@ export const useCartStore = create<CartState>((set, get) => ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItemId }),
       });
+       toast.success("Продукт удалён из корзины")
     } catch (error) {
+      toast.error("Ошибка при удалении продукта из корзины")
       console.error("Failed to remove from cart", error);
     }
   },
