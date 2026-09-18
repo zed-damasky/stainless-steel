@@ -41,7 +41,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
       <Link href={`/product/${id}`}>
         <div className="relative flex justify-center p-6 bg-secondary rounded-lg h-65 items-center group">
           <img
-            className="h-auto w-auto max-h-53.75 max-w-53.75 object-contain"
+            className="h-auto w-auto max-h-53.75 object-contain"
             src={imageUrl[currentImageIndex]}
             alt={name}
           />
